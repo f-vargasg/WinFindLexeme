@@ -33,6 +33,7 @@
             this.butDo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTableName = new System.Windows.Forms.TextBox();
+            this.butTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtInput
@@ -60,7 +61,7 @@
             // 
             // butDo
             // 
-            this.butDo.Location = new System.Drawing.Point(324, 277);
+            this.butDo.Location = new System.Drawing.Point(128, 268);
             this.butDo.Name = "butDo";
             this.butDo.Size = new System.Drawing.Size(249, 71);
             this.butDo.TabIndex = 2;
@@ -84,11 +85,22 @@
             this.txtTableName.Size = new System.Drawing.Size(502, 26);
             this.txtTableName.TabIndex = 4;
             // 
+            // butTest
+            // 
+            this.butTest.Location = new System.Drawing.Point(468, 268);
+            this.butTest.Name = "butTest";
+            this.butTest.Size = new System.Drawing.Size(249, 71);
+            this.butTest.TabIndex = 5;
+            this.butTest.Text = "DoTest";
+            this.butTest.UseVisualStyleBackColor = true;
+            this.butTest.Click += new System.EventHandler(this.butTest_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 608);
+            this.Controls.Add(this.butTest);
             this.Controls.Add(this.txtTableName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.butDo);
@@ -111,6 +123,7 @@
         private System.Windows.Forms.Button butDo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTableName;
+        private System.Windows.Forms.Button butTest;
     }
 }
 

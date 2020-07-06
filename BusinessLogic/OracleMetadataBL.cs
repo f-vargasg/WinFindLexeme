@@ -1,5 +1,4 @@
 ﻿using DataLayer;
-using DbObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,43 +9,23 @@ namespace BusinessLogic
 {
     public class OracleMetadataBL
     {
-        private const string sqlBase = "from ( " + Environment.NewLine +
-select  "+ Environment.NewLine +
-(case " + Environment.NewLine +
-   when a.DATA_TYPE = 'NUMBER' THEN  " + Environment.NewLine +
-     case when a.DATA_SCALE = 0  then  " + Environment.NewLine +
-        'int'  " + Environment.NewLine +
-     else  " + Environment.NewLine +
-        'double'  " + Environment.NewLine +
-     end+ Environment.NewLine +
-   when a.DATA_TYPE = 'DATE' THEN+ Environment.NewLine +
-      'DateTime'+ Environment.NewLine +
-   when a.DATA_TYPE = 'VARCHAR2' or+ Environment.NewLine +
-        a.DATA_TYPE = 'CLOB'  THEN+ Environment.NewLine +
-      'string'+ Environment.NewLine +
-   else+ Environment.NewLine +
-      'NO-DEFINIDO'+ Environment.NewLine +
-end ) as csharpType,+ Environment.NewLine +
-replace(initcap (a.column_name), '_')  as CSharpAttribute,+ Environment.NewLine +
-lower(SUBSTR(replace(initcap (a.column_name), '_'),1,1)) || + Environment.NewLine +
-SUBSTR(replace(initcap (a.column_name), '_'),2 ,length(replace(a.column_name, '_')) - 1) as CSharpMember, + Environment.NewLine +
-A.* " + Environment.NewLine +
-FROM ALL_TAB_COLUMNS a
-where a.TABLE_NAME = '&&tableName'
-and a.OWNER = 'MYTEST') reg"
         OracleMetaDataDL oraMetaDL;
+
+
         public OracleMetadataBL()
         {
             this.oraMetaDL = new OracleMetaDataDL();
         }
 
-        public string InfoTabla (string pTableName, string pLexemeName)
+        public string TableName { get => this.oraMetaDL.TableName; set => this.oraMetaDL.TableName = value; }
+
+        public string ObtPackageName()
         {
             string res = string.Empty;
 
             try
             {
-
+                res = this.oraMetaDL.ObtPackageName();
                 return res;
             }
             catch (Exception)
@@ -54,8 +33,143 @@ and a.OWNER = 'MYTEST') reg"
 
                 throw;
             }
+        }
 
+        public string ParamKeyFields()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.ParamKeyFields();
+                return res;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        public string CompareKeys()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.CompareKeys();
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string InsertParams()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.GetCodeBasedColumns("ListParamSQL", ",");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string TblInsertFlds()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.GetCodeBasedColumns("ListColumns", ",");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ParamsToInserta()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.GetCodeBasedColumns("ListColsParams", ",");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ModifyParams()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.GetCodeBasedColumns("ListParamSql", ",");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string TblModifyFlds()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.GetCodeBasedColumns("AsignSqlValues", ",");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //TODO: paramKeyFlds
+        public string ParamKeyFlds()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.ParamKeyFields();
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string PrintLstKeys()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.GetCodeBasedColumns("AsignSqlValues", ",");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
+
 }

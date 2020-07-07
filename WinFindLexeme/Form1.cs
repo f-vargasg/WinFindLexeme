@@ -92,16 +92,22 @@ namespace WinFindLexeme
         private void butDo_Click(object sender, EventArgs e)
         {
 
-            List<TokenTemp> lst;
+            List<TokenTemp> lst = null;
+            string scrap = string.Empty;
+            string expandLex = string.Empty;
 
             try
             {
+                this.oraMetaBL.TableName = txtTableName.Text;
                 lst = FindLexemes(txtInput.Text);
-
+                scrap = txtInput.Text;
                 foreach (var item in lst)
                 {
-                    txtOutput.Text += item.ToString() + Environment.NewLine;
+                    expandLex = this.oraMetaBL.CodeExpanded(item.Lexema);
+                    scrap = scrap.Replace(item.Lexema, expandLex);
+
                 }
+                txtOutput.Text = scrap;
             }
             catch (Exception ex)
             {
@@ -118,7 +124,7 @@ namespace WinFindLexeme
             try
             {
                 this.oraMetaBL.TableName = txtTableName.Text;
-                string scrap = this.oraMetaBL.ParamKeyFields();
+                string scrap = this.oraMetaBL.PrintLstKeys();
                 txtOutput.Text = scrap;
             }
             catch (Exception ex)

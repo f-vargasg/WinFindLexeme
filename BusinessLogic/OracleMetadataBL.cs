@@ -161,7 +161,7 @@ namespace BusinessLogic
             string res = string.Empty;
             try
             {
-                res = this.oraMetaDL.GetCodeBasedColumns("AsignSqlValues", ",");
+                res = this.oraMetaDL.PrintLstKeys();
                 return res;
             }
             catch (Exception)
@@ -170,6 +170,94 @@ namespace BusinessLogic
                 throw;
             }
         }
+    
+        public string AddKeysParametersInvoke ()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.AddKeysParametersInvoke();
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ParamKeysCall()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.ParamKeysCall();
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string CodeExpanded (string plexeme)
+        {
+            try
+            {
+                string res = string.Empty;
+                switch (plexeme)
+                {
+                    case ConstExpandPck.lexPackageName:
+                        res = ObtPackageName();
+                        break;
+                    case ConstExpandPck.lexTableName:
+                        res = TableName;
+                        break;
+                    case ConstExpandPck.lexParamKeyFlds:
+                        res = ParamKeyFields();
+                        break;
+                    case ConstExpandPck.lexCompareKeys:
+                        res = CompareKeys();
+                        break;
+                    case ConstExpandPck.lexInsertParams:
+                        res = InsertParams();
+                        break;
+                    case ConstExpandPck.lexTblInsertFlds:
+                        res = TblInsertFlds();
+                        break;
+                    case ConstExpandPck.lexParamsToInserta:
+                        res = ParamsToInserta();
+                        break;
+                    case ConstExpandPck.lexModifyParams:
+                        res = ModifyParams();
+                        break;
+                    case ConstExpandPck.lexTblModifyFlds:
+                        res = TblModifyFlds();
+                        break;
+                    case ConstExpandPck.lexPrintLstKeys:
+                        res = PrintLstKeys();
+                        break;
+                    case ConstExpandPck.lexAddKeysParametersInvoke:
+                        res = AddKeysParametersInvoke();
+                        break;
+                    case ConstExpandPck.lexParamKeysCall:
+                        res = ParamKeysCall();
+                        break;
+                    default:
+                        res = "<NO_DEFINIDO>";
+                        break;
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
     }
 
 }

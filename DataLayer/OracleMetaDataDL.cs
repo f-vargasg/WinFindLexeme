@@ -13,6 +13,7 @@ namespace DataLayer
 
         // Lexemas
         private const string lexTableName = "<%tableName>";
+        private const string lexFldDb = "<%fldDb>";
 
         #region SQL Base
         private const string sqlBase =
@@ -66,9 +67,11 @@ namespace DataLayer
                 " and cols.table_name = tabcols.table_name \n" +
                 " and cols.owner = tabcols.owner \n" +
                 "  ORDER BY cols.table_name, cols.position ";
+
+        
         #endregion
 
-       
+
         public string TableName { get; set; }
 
 
@@ -84,7 +87,7 @@ namespace DataLayer
                 fin = scrap.IndexOf('_', 0);
                 if (fin >= 0)  // encontro
                 {
-                    res = this.TableName.Substring(0, fin + 1) + "_P" +
+                    res = this.TableName.Substring(0, fin + 1) + "P" +
                           this.TableName.Substring(fin + 1, this.TableName.Length - fin -1 );
                  ; 
                 }
@@ -101,6 +104,8 @@ namespace DataLayer
             }
 
         }
+
+        
 
         public string ParamKeyFields()
         {
@@ -204,6 +209,114 @@ namespace DataLayer
             }
         }
 
+        public string AddKeysParametersInvoke()
+        {
+            string res = string.Empty;
+            string sqlStm = string.Empty;
+            string scrap = string.Empty;
+            string template = " GE_PAMBCOMMON.ADDPARAMNUMBER(pParams => arrParams, " + Environment.NewLine +
+                                                      "     PPARAMNAME => "+ lexFldDb + ", " + Environment.NewLine +
+                                                      "     PVALUE => P"+ lexFldDb +"); *" ;
+            bool ft = true;
+            try
+            {
+                sqlStm = sqlKeysTable;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                scrap = template;
+
+                                scrap = scrap.Replace(lexFldDb, Convert.ToString( reader["COLUMN_NAME"]));
+                                res += (ft ? string.Empty : Environment.NewLine + "; ") +
+                                    scrap;
+                                ft = false;
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ParamKeysCall()
+        {
+            string res = string.Empty;
+            string scrap = string.Empty;
+            bool ft = true;
+
+            try
+            {
+                string sqlStm = sqlKeysTable;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                scrap = reader["COLUMN_NAME"] + " => p" + reader["COLUMN_NAME"];
+                                res += (ft ? string.Empty : ", " +  Environment.NewLine ) +
+                                    scrap;
+                                ft = false;
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public string PrintLstKeys()
+        {
+            string res = string.Empty;
+            string scrap = string.Empty;
+            bool ft = true;
+
+            try
+            {
+                string sqlStm = sqlKeysTable;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                scrap = reader["COLUMN_NAME"] + " => p" + reader["COLUMN_NAME"];
+                                res += (ft ? string.Empty : ", " + Environment.NewLine) +
+                                    scrap;
+                                ft = false;
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }

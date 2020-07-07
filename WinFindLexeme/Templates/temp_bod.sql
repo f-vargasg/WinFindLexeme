@@ -77,7 +77,7 @@ PROCEDURE MODIFICA (<%modifyParams>,
 BEGIN
     UPDATE <%tableName>
     SET <%tblModifyFlds>
-    WHERE <%keysCompare>;
+    WHERE <%compareKeys>;
 
 
     GE_PAMBBITOBJETO.registrar(pcod_accionreg_n     => 3,
@@ -100,7 +100,7 @@ IS
 BEGIN
 
     DELETE FROM <%tableName>
-    WHERE 	<%keysCompare>;
+    WHERE 	<%compareKeys>;
 
 
     GE_PAMBBITOBJETO.registrar(pcod_accionreg_n     => 4,
@@ -123,7 +123,7 @@ BEGIN
 
     UPDATE <%tableName>
     SET cod_estado_n = pcod_estado_n
-    WHERE 	<%keysCompare>;
+    WHERE 	<%compareKeys>;
 
     GE_PAMBBITOBJETO.registrar(pcod_accionreg_n     => 2,
                                pdes_tabla           => '<%tableName>',
@@ -157,13 +157,13 @@ BEGIN
             SELECT A.*
             Into wRes
             FROM    <%tableName> A
-            WHERE   <%keysCompare>
+            WHERE   <%compareKeys>
             FOR UPDATE;
         ELSE -- no blocking
             SELECT A.*
             INTO wRes
             FROM    <%tableName> A
-            WHERE   <%keysCompare>;
+            WHERE   <%compareKeys>;
         END IF;
     EXCEPTION
       WHEN NO_DATA_FOUND THEN

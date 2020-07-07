@@ -33,6 +33,7 @@ namespace BusinessEntity
             
         }
 
+        /*
         public override int GetHashCode()
         {
             int hashCode = 1254347603;
@@ -40,6 +41,7 @@ namespace BusinessEntity
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Ptoken);
             return hashCode;
         }
+        */
 
         public override string ToString()
         {

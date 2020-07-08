@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
+using Utilities;
 
 namespace DataLayer
 {
@@ -68,7 +69,7 @@ namespace DataLayer
                 " and cols.owner = tabcols.owner \n" +
                 "  ORDER BY cols.table_name, cols.position ";
 
-        
+
         #endregion
 
 
@@ -88,8 +89,8 @@ namespace DataLayer
                 if (fin >= 0)  // encontro
                 {
                     res = this.TableName.Substring(0, fin + 1) + "P" +
-                          this.TableName.Substring(fin + 1, this.TableName.Length - fin -1 );
-                 ; 
+                          this.TableName.Substring(fin + 1, this.TableName.Length - fin - 1);
+                    ;
                 }
                 else
                 {
@@ -105,7 +106,7 @@ namespace DataLayer
 
         }
 
-        
+
 
         public string ParamKeyFields()
         {
@@ -158,7 +159,7 @@ namespace DataLayer
                         {
                             while (reader.Read())
                             {
-                                res += (ft ? string.Empty : Environment.NewLine + " AND ") + 
+                                res += (ft ? string.Empty : Environment.NewLine + " AND ") +
                                     Convert.ToString(reader["COLUMN_NAME"]) + "  = p" + reader["COLUMN_NAME"];
                                 ft = false;
                             }
@@ -174,11 +175,13 @@ namespace DataLayer
             }
         }
 
-        public string GetCodeBasedColumns(string pLexeme, 
-                                          string pSeparador)
+        public string GetCodeBasedColumns(string pLexeme,
+                                          string pSeparador,
+                                          bool pTrailSeparator)
         {
             string sqlStm;
             string res = string.Empty;
+            int contFilas = 0;
             bool ft = true;
 
             try
@@ -193,10 +196,12 @@ namespace DataLayer
                         {
                             while (reader.Read())
                             {
-                                res += (ft ?  string.Empty : pSeparador +  Environment.NewLine ) +
-                                    Convert.ToString(reader[pLexeme]);
+
+                                res += (ft ? string.Empty : pSeparador + Environment.NewLine) +
+                                Convert.ToString(reader[pLexeme]);
                                 ft = false;
                             }
+                            res += (pTrailSeparator ? pSeparador : string.Empty);
                         }
                     }
                 }
@@ -215,8 +220,8 @@ namespace DataLayer
             string sqlStm = string.Empty;
             string scrap = string.Empty;
             string template = " GE_PAMBCOMMON.ADDPARAMNUMBER(pParams => arrParams, " + Environment.NewLine +
-                                                      "     PPARAMNAME => "+ lexFldDb + ", " + Environment.NewLine +
-                                                      "     PVALUE => P"+ lexFldDb +"); *" ;
+                                                      "     PPARAMNAME => " + lexFldDb + ", " + Environment.NewLine +
+                                                      "     PVALUE => P" + lexFldDb + "); ";
             bool ft = true;
             try
             {
@@ -232,7 +237,7 @@ namespace DataLayer
                             {
                                 scrap = template;
 
-                                scrap = scrap.Replace(lexFldDb, Convert.ToString( reader["COLUMN_NAME"]));
+                                scrap = scrap.Replace(lexFldDb, Convert.ToString(reader["COLUMN_NAME"]));
                                 res += (ft ? string.Empty : Environment.NewLine + "; ") +
                                     scrap;
                                 ft = false;
@@ -268,7 +273,7 @@ namespace DataLayer
                             while (reader.Read())
                             {
                                 scrap = reader["COLUMN_NAME"] + " => p" + reader["COLUMN_NAME"];
-                                res += (ft ? string.Empty : ", " +  Environment.NewLine ) +
+                                res += (ft ? string.Empty : ", " + Environment.NewLine) +
                                     scrap;
                                 ft = false;
                             }
@@ -283,10 +288,41 @@ namespace DataLayer
                 throw;
             }
         }
+
+        private string stmShowValues(string pColName,
+                                     string pType)
+        {
+            string res = string.Empty;
+            try
+            {
+                res = "'" + pColName + " = ' || ";
+                switch (pType)
+                {
+                    case "VARCHAR2":
+                        res += ("p" + pColName);
+                        break;
+                    case "NUMBER":
+                        res += ("TO_CHAR(p" + pColName + ")");
+                        break;
+                    case "DATE":
+                        res += ("TO_DATE(p" + pColName + ", 'DD/MM/RRRR')");
+                        break;
+                    default:
+                        break;
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public string PrintLstKeys()
         {
             string res = string.Empty;
             string scrap = string.Empty;
+            string scrap1 = string.Empty;
             bool ft = true;
 
             try
@@ -301,8 +337,13 @@ namespace DataLayer
                         {
                             while (reader.Read())
                             {
-                                scrap = reader["COLUMN_NAME"] + " => p" + reader["COLUMN_NAME"];
-                                res += (ft ? string.Empty : ", " + Environment.NewLine) +
+
+                                scrap = Convert.ToString(reader["COLUMN_NAME"]);
+                                scrap1 = Convert.ToString(reader["DATA_TYPE"]);
+
+
+                                scrap = stmShowValues(scrap, scrap1);
+                                res += (ft ? string.Empty : " || " + Environment.NewLine) +
                                     scrap;
                                 ft = false;
                             }

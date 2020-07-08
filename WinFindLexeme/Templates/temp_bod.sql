@@ -51,10 +51,12 @@ PROCEDURE INSERTA (<%insertParams>
 BEGIN
 
 
-    wcod_registro := GE_PAMBCOMMON.CONSECUTIVO;
+    wcod_registro_n := GE_PAMBCOMMON.CONSECUTIVO;
 
-     Insert Into <%tableName>(<%tblInsertFlds>)
-     Values (<%paramsToInserta>);
+     Insert Into <%tableName>(<%tblInsertFlds>, 
+                               cod_registro_n)
+     Values (<%paramsToInserta>,
+             wcod_registro_n);
 
 
 
@@ -69,7 +71,7 @@ EXCEPTION
     END INSERTA;
 ----------------------------------------------------------------
 -- Procedimiento de modificacion en la tabla
-PROCEDURE MODIFICA (<%modifyParams>,
+PROCEDURE MODIFICA (<%modifyParams>
                     pCOD_USUARIOREG_V IN VARCHAR2,
                     pCOD_REGISTRO_N IN NUMBER,
                     PNUM_VERSION IN NUMBER

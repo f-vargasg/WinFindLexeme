@@ -70,7 +70,7 @@ namespace BusinessLogic
             string res = string.Empty;
             try
             {
-                res = this.oraMetaDL.GetCodeBasedColumns("ListParamSQL", ",");
+                res = this.oraMetaDL.GetCodeBasedColumns("ListParamSQL", ",", true);
                 return res;
             }
             catch (Exception)
@@ -85,7 +85,7 @@ namespace BusinessLogic
             string res = string.Empty;
             try
             {
-                res = this.oraMetaDL.GetCodeBasedColumns("ListColumns", ",");
+                res = this.oraMetaDL.GetCodeBasedColumns("ListColumns", ",", false);
                 return res;
             }
             catch (Exception)
@@ -100,7 +100,7 @@ namespace BusinessLogic
             string res = string.Empty;
             try
             {
-                res = this.oraMetaDL.GetCodeBasedColumns("ListColsParams", ",");
+                res = this.oraMetaDL.GetCodeBasedColumns("ListColsParams", ",", false);
                 return res;
             }
             catch (Exception)
@@ -115,7 +115,7 @@ namespace BusinessLogic
             string res = string.Empty;
             try
             {
-                res = this.oraMetaDL.GetCodeBasedColumns("ListParamSql", ",");
+                res = this.oraMetaDL.GetCodeBasedColumns("ListParamSql", ",", true);
                 return res;
             }
             catch (Exception)
@@ -130,7 +130,7 @@ namespace BusinessLogic
             string res = string.Empty;
             try
             {
-                res = this.oraMetaDL.GetCodeBasedColumns("AsignSqlValues", ",");
+                res = this.oraMetaDL.GetCodeBasedColumns("AsignSqlValues", ",", false);
                 return res;
             }
             catch (Exception)

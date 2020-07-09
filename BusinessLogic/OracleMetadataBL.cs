@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using BusinessEntity;
+using DataLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -256,6 +257,84 @@ namespace BusinessLogic
                 throw;
             }
 
+        }
+
+        private List<TokenTemp> FindLexemes(string pTexto)
+        {
+            List<TokenTemp> res;
+            TokenTemp tok;
+            string scrap = string.Empty; ;
+            int vcb = 0;
+            int inic = 0;
+            int fin = 0;
+            int tolerancia = 10000;
+            int cont = 0;
+            try
+            {
+                res = new List<TokenTemp>();
+                // while (vcb < pTexto.Length && cont <= tolerancia)
+                while (vcb < pTexto.Length)
+                {
+                    /*                    Console.WriteLine("vcb = " + vcb.ToString());
+                                        Console.WriteLine("cont = " + cont.ToString()); */
+
+                    ++cont;
+                    vcb = pTexto.IndexOf("<%", inic);
+                    if (vcb >= 0)
+                    {
+                        // busca el cierre
+                        fin = pTexto.IndexOf(">", vcb);
+                        if (fin >= 0)
+                        {
+                            scrap = pTexto.Substring(vcb, fin - vcb + 1);
+                            tok = new TokenTemp(scrap);
+                            if (!res.Contains(tok))
+                            {
+                                res.Add(tok);
+                            }
+                            inic = vcb = fin + 1;
+                        }
+                        else
+                        {
+                            vcb = pTexto.Length;
+                        }
+                    }
+                    else
+                    {
+                        vcb = pTexto.Length;
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ExpandCode(string pTempText)
+        {
+            List<TokenTemp> lst;
+            string res;
+            try
+            {
+                string expandLex = string.Empty;
+                lst = FindLexemes(pTempText);
+                res = pTempText;
+                foreach (var item in lst)
+                {
+                    expandLex = CodeExpanded(item.Lexema);
+                    res = res.Replace(item.Lexema, expandLex);
+
+                }
+
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincCRUDGen));
-            this.txtTemplate = new System.Windows.Forms.TextBox();
             this.txtBody = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTableName = new System.Windows.Forms.TextBox();
@@ -39,9 +38,14 @@
             this.ExittlsStr = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SpecPg = new System.Windows.Forms.TabPage();
+            this.txtSpec = new System.Windows.Forms.TextBox();
             this.BodyPg = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtSpec = new System.Windows.Forms.TextBox();
+            this.txtTempBod = new System.Windows.Forms.TextBox();
+            this.TemplatesTab = new System.Windows.Forms.TabControl();
+            this.SpecTempTbPg = new System.Windows.Forms.TabPage();
+            this.BodyTempTbPg = new System.Windows.Forms.TabPage();
+            this.txtTempSpec = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SpecPg.SuspendLayout();
@@ -50,19 +54,10 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.TemplatesTab.SuspendLayout();
+            this.SpecTempTbPg.SuspendLayout();
+            this.BodyTempTbPg.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtTemplate
-            // 
-            this.txtTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTemplate.Location = new System.Drawing.Point(3, 44);
-            this.txtTemplate.Multiline = true;
-            this.txtTemplate.Name = "txtTemplate";
-            this.txtTemplate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTemplate.Size = new System.Drawing.Size(1090, 307);
-            this.txtTemplate.TabIndex = 0;
             // 
             // txtBody
             // 
@@ -71,7 +66,7 @@
             this.txtBody.Multiline = true;
             this.txtBody.Name = "txtBody";
             this.txtBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBody.Size = new System.Drawing.Size(1079, 271);
+            this.txtBody.Size = new System.Drawing.Size(1079, 278);
             this.txtBody.TabIndex = 1;
             // 
             // label1
@@ -157,13 +152,23 @@
             this.SpecPg.Text = "Package Spec";
             this.SpecPg.UseVisualStyleBackColor = true;
             // 
+            // txtSpec
+            // 
+            this.txtSpec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSpec.Location = new System.Drawing.Point(3, 3);
+            this.txtSpec.Multiline = true;
+            this.txtSpec.Name = "txtSpec";
+            this.txtSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtSpec.Size = new System.Drawing.Size(1079, 271);
+            this.txtSpec.TabIndex = 2;
+            // 
             // BodyPg
             // 
             this.BodyPg.Controls.Add(this.txtBody);
-            this.BodyPg.Location = new System.Drawing.Point(4, 29);
+            this.BodyPg.Location = new System.Drawing.Point(4, 22);
             this.BodyPg.Name = "BodyPg";
             this.BodyPg.Padding = new System.Windows.Forms.Padding(3);
-            this.BodyPg.Size = new System.Drawing.Size(1085, 277);
+            this.BodyPg.Size = new System.Drawing.Size(1085, 284);
             this.BodyPg.TabIndex = 1;
             this.BodyPg.Text = "Package Body";
             this.BodyPg.UseVisualStyleBackColor = true;
@@ -177,7 +182,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.txtTemplate);
+            this.splitContainer1.Panel1.Controls.Add(this.TemplatesTab);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.txtTableName);
             // 
@@ -188,17 +193,62 @@
             this.splitContainer1.SplitterDistance = 354;
             this.splitContainer1.TabIndex = 8;
             // 
-            // txtSpec
+            // txtTempBod
             // 
-            this.txtSpec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSpec.Location = new System.Drawing.Point(3, 3);
-            this.txtSpec.Multiline = true;
-            this.txtSpec.Name = "txtSpec";
-            this.txtSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSpec.Size = new System.Drawing.Size(1079, 271);
-            this.txtSpec.TabIndex = 2;
+            this.txtTempBod.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTempBod.Location = new System.Drawing.Point(3, 3);
+            this.txtTempBod.Multiline = true;
+            this.txtTempBod.Name = "txtTempBod";
+            this.txtTempBod.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtTempBod.Size = new System.Drawing.Size(1065, 272);
+            this.txtTempBod.TabIndex = 0;
             // 
-            // Form1
+            // TemplatesTab
+            // 
+            this.TemplatesTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TemplatesTab.Controls.Add(this.SpecTempTbPg);
+            this.TemplatesTab.Controls.Add(this.BodyTempTbPg);
+            this.TemplatesTab.Location = new System.Drawing.Point(7, 41);
+            this.TemplatesTab.Name = "TemplatesTab";
+            this.TemplatesTab.SelectedIndex = 0;
+            this.TemplatesTab.Size = new System.Drawing.Size(1079, 311);
+            this.TemplatesTab.TabIndex = 5;
+            // 
+            // SpecTempTbPg
+            // 
+            this.SpecTempTbPg.Controls.Add(this.txtTempSpec);
+            this.SpecTempTbPg.Location = new System.Drawing.Point(4, 29);
+            this.SpecTempTbPg.Name = "SpecTempTbPg";
+            this.SpecTempTbPg.Padding = new System.Windows.Forms.Padding(3);
+            this.SpecTempTbPg.Size = new System.Drawing.Size(1071, 278);
+            this.SpecTempTbPg.TabIndex = 0;
+            this.SpecTempTbPg.Text = "Spec Template";
+            this.SpecTempTbPg.UseVisualStyleBackColor = true;
+            // 
+            // BodyTempTbPg
+            // 
+            this.BodyTempTbPg.Controls.Add(this.txtTempBod);
+            this.BodyTempTbPg.Location = new System.Drawing.Point(4, 29);
+            this.BodyTempTbPg.Name = "BodyTempTbPg";
+            this.BodyTempTbPg.Padding = new System.Windows.Forms.Padding(3);
+            this.BodyTempTbPg.Size = new System.Drawing.Size(1071, 278);
+            this.BodyTempTbPg.TabIndex = 1;
+            this.BodyTempTbPg.Text = "Body Template";
+            this.BodyTempTbPg.UseVisualStyleBackColor = true;
+            // 
+            // txtTempSpec
+            // 
+            this.txtTempSpec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTempSpec.Location = new System.Drawing.Point(3, 3);
+            this.txtTempSpec.Multiline = true;
+            this.txtTempSpec.Name = "txtTempSpec";
+            this.txtTempSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtTempSpec.Size = new System.Drawing.Size(1065, 272);
+            this.txtTempSpec.TabIndex = 1;
+            // 
+            // FrmPrincCRUDGen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -206,11 +256,11 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "FrmPrincCRUDGen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "Generate Oracle Packages";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -223,14 +273,17 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.TemplatesTab.ResumeLayout(false);
+            this.SpecTempTbPg.ResumeLayout(false);
+            this.SpecTempTbPg.PerformLayout();
+            this.BodyTempTbPg.ResumeLayout(false);
+            this.BodyTempTbPg.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtTemplate;
         private System.Windows.Forms.TextBox txtBody;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTableName;
@@ -243,6 +296,11 @@
         private System.Windows.Forms.TabPage BodyPg;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox txtSpec;
+        private System.Windows.Forms.TabControl TemplatesTab;
+        private System.Windows.Forms.TabPage SpecTempTbPg;
+        private System.Windows.Forms.TextBox txtTempSpec;
+        private System.Windows.Forms.TabPage BodyTempTbPg;
+        private System.Windows.Forms.TextBox txtTempBod;
     }
 }
 

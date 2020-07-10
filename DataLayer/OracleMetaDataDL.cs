@@ -72,6 +72,29 @@ namespace DataLayer
 
         #endregion
 
+        #region SQL No Keys
+        private const string sqlNokeys = "SELECT a.owner, a.table_name, a.data_type, a.column_name, A.COLUMN_ID  \n" +
+                                        " FROM ALL_TAB_COLUMNS a  \n" +
+                                        " where a.TABLE_NAME = 'GE_AMBPRUEBA'  \n" +
+                                        " and a.OWNER = 'MYTEST'  \n" +
+                                        " MINUS  \n" +
+                                        " SELECT cons.owner, cols.table_name, tabcols.data_type, cols.column_name, tabcols.column_id  \n" +
+                                        " --cols.position, cons.status  \n" +
+                                        " FROM all_constraints cons, all_cons_columns cols, all_tab_columns tabcols  \n" +
+                                           " WHERE  \n" +
+                                           " cols.table_name = '" + lexTableName + "'  \n" +
+                                           " AND CONS.OWNER = 'MYTEST'  \n" +
+                                        " AND cons.constraint_type = 'P' \n" +
+                                        " AND cons.constraint_name = cols.constraint_name  \n" +
+                                        "  AND cons.owner = cols.owner  \n" +
+                                        " and cols.column_name = tabcols.column_name \n" +
+                                         " and cols.table_name = tabcols.table_name  \n" +
+                                         " and cols.owner = tabcols.owner \n" +
+                                        " ORDER BY column_id";
+        #endregion
+
+
+
 
         public string TableName { get; set; }
 
@@ -141,6 +164,45 @@ namespace DataLayer
             }
         }
 
+        public string ParamNoDiscFlds(string pDiscFld)
+        {
+            string sqlStm;
+            string res = string.Empty;
+            string colName = string.Empty;
+            bool ft = true;
+
+            try
+            {
+                sqlStm = sqlKeysTable;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                colName = Convert.ToString(reader["COLUMN_NAME"]);
+                                if (colName.CompareTo(pDiscFld) != 0)
+                                {
+                                    res += (ft ? string.Empty : ", " + Environment.NewLine) + 'p' + Convert.ToString(reader["COLUMN_NAME"]) + "  IN " + reader["DATA_TYPE"];
+                                    ft = false;
+                                }
+
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public string CompareKeys()
         {
             string sqlStm;
@@ -162,6 +224,80 @@ namespace DataLayer
                                 res += (ft ? string.Empty : Environment.NewLine + " AND ") +
                                     Convert.ToString(reader["COLUMN_NAME"]) + "  = p" + reader["COLUMN_NAME"];
                                 ft = false;
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ParamsNoKeys()
+        {
+            string sqlStm;
+            string res = string.Empty;
+            string columName;
+            bool ft = true;
+
+            try
+            {
+                sqlStm = sqlNokeys;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                columName = Convert.ToString(reader["COLUMN_NAME"]);
+                                res += (ft ? string.Empty : ", " + Environment.NewLine) + 'p' + columName + "  IN " + reader["DATA_TYPE"];
+                                ft = false;
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ParamDiscFlds(object pDiscFld)
+        {
+            string sqlStm;
+            string res = string.Empty;
+            string colName = string.Empty;
+            bool ft = true;
+
+            try
+            {
+                sqlStm = sqlKeysTable;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                colName = Convert.ToString(reader["COLUMN_NAME"]);
+                                if (colName.CompareTo(pDiscFld) == 0)
+                                {
+                                    res += (ft ? string.Empty : ", " + Environment.NewLine) + 'p' + Convert.ToString(reader["COLUMN_NAME"]) + "  OUT " + reader["DATA_TYPE"];
+                                    ft = false;
+                                }
+
                             }
                         }
                     }
@@ -217,8 +353,8 @@ namespace DataLayer
         public string AddKeysParametersInvoke()
         {
             string res = string.Empty;
-            string sqlStm = string.Empty;
-            string scrap = string.Empty;
+            string sqlStm;
+            string scrap;
             string template = " GE_PAMBCOMMON.ADDPARAMNUMBER(pParams => arrParams, " + Environment.NewLine +
                                                       "     PPARAMNAME => " + lexFldDb + ", " + Environment.NewLine +
                                                       "     PVALUE => P" + lexFldDb + "); ";
@@ -257,7 +393,7 @@ namespace DataLayer
         public string ParamKeysCall()
         {
             string res = string.Empty;
-            string scrap = string.Empty;
+            string scrap;
             bool ft = true;
 
             try

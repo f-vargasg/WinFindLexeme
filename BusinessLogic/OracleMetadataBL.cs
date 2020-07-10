@@ -20,6 +20,8 @@ namespace BusinessLogic
 
         public string TableName { get => this.oraMetaDL.TableName; set => this.oraMetaDL.TableName = value; }
 
+        public string DiscFld { get; set; }
+
         public string ObtPackageName()
         {
             string res = string.Empty;
@@ -202,6 +204,21 @@ namespace BusinessLogic
             }
         }
 
+        public string ParamNoDiscFlds(string pDiscFld)
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.ParamNoDiscFlds(pDiscFld);
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public string CodeExpanded (string plexeme)
         {
             try
@@ -245,6 +262,15 @@ namespace BusinessLogic
                     case ConstExpandPck.lexParamKeysCall:
                         res = ParamKeysCall();
                         break;
+                    case ConstExpandPck.lexParamNoDiscFlds:
+                        res = ParamNoDiscFlds(this.DiscFld);
+                        break;
+                    case ConstExpandPck.lexParamDiscFlds:
+                        res = ParamDiscFlds(this.DiscFld);
+                        break;
+                    case ConstExpandPck.lexParamsNoKeys:
+                        res = ParamsNoKeys();
+                        break;
                     default:
                         res = "<NO_DEFINIDO>";
                         break;
@@ -257,6 +283,36 @@ namespace BusinessLogic
                 throw;
             }
 
+        }
+
+        private string ParamsNoKeys()
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.ParamsNoKeys();
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private string ParamDiscFlds(string pDiscFlds)
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.ParamDiscFlds(pDiscFlds);
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private List<TokenTemp> FindLexemes(string pTexto)

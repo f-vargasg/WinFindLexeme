@@ -13,6 +13,9 @@ namespace BusinessLogic
         public const string lexParamKeyFlds = "<%paramKeyFlds>";
         public const string lexCompareKeys = "<%compareKeys>";
         public const string lexInsertParams = "<%insertParams>";
+        public const string lexParamNoDiscFlds = "<%paramNoDiscFlds>";  //TODO: paramNoDiscFlds
+        public const string lexParamDiscFlds = "<%paramDiscFlds>";     //TODO: paramDiscFlds
+        public const string lexParamsNoKeys = "<%paramsNoKeysFlds>";
         public const string lexTblInsertFlds = "<%tblInsertFlds>";
         public const string lexParamsToInserta = "<%paramsToInserta>";
         public const string lexModifyParams = "<%modifyParams>";

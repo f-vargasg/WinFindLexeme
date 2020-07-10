@@ -29,6 +29,7 @@ namespace WinFindLexeme
             this.Text = this.Text + " (" + this.Name + ")";
             this.oraMetaBL = new OracleMetadataBL();
             txtTableName.Text = ConfigurationManager.AppSettings["defTableName"];
+            txtDiscFld.Text = ConfigurationManager.AppSettings["defDiscFld"];
             string pathFileSpec = ConfigurationManager.AppSettings["pathSpec"];
             txtTempSpec.Text = File.ReadAllText(pathFileSpec);
 
@@ -43,6 +44,7 @@ namespace WinFindLexeme
             try
             {
                 this.oraMetaBL.TableName = txtTableName.Text;
+                this.oraMetaBL.DiscFld = txtDiscFld.Text;
                 txtSpec.Text = this.oraMetaBL.ExpandCode(txtTempSpec.Text);
                 txtBody.Text = this.oraMetaBL.ExpandCode(txtTempBod.Text);
 

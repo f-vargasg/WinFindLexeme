@@ -1,9 +1,11 @@
-﻿using System;
+﻿using CommonLexeme;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using System.Security;
 using System.Text;
 using Utilities;
 
@@ -203,6 +205,91 @@ namespace DataLayer
             }
         }
 
+
+        public string SmtSelectConse(string pDiscrFld,
+                                string pTableName,
+                                string pCmpNoDiscFlds,
+                                string pAliasTable)
+        {
+            string res = "SELECT NVL(MAX(a." + ConstExpandPck.lexDiscFlds + "), 0) + 1 into wres " + Environment.NewLine +
+                         "FROM " + ConstExpandPck.lexTableName + " <%aliasTable> " + Environment.NewLine +
+                         "WHERE " + ConstExpandPck.lexCmpNoDiscFlds ;
+            string lDiscFlds = string.Empty; ;
+            string lCmpNoDiscFlds = string.Empty;
+            string scrap = string.Empty;
+            bool ft;
+            try
+            {
+                res = res.Replace(ConstExpandPck.lexDiscFlds, pDiscrFld);
+                res = res.Replace(ConstExpandPck.lexTableName, pTableName);
+                res = res.Replace(ConstExpandPck.lexAliasTable, pAliasTable);
+                scrap = CmpNoDiscFlds(pDiscrFld, pAliasTable);
+                res = res.Replace(ConstExpandPck.lexCmpNoDiscFlds, scrap);
+                /*
+                string[] arrDiscFld = pDiscrFld.Split(',');
+                string[] arrCmpNoDiscFlds = pCmpNoDiscFlds.Split('=');
+                ft = true;
+                foreach (var item in arrDiscFld)
+                {
+                    lDiscFlds += ((ft ? string.Empty : Environment.NewLine + ",") + item);
+                    ft = false;
+                }
+
+                res = res.Replace(ConstExpandPck.lexDiscFlds, lDiscFlds); ;
+                res = res.Replace(lexTableName, pTableName);
+                res = res.Replace("<%aliasTable>", pAliasTable);
+                res = res.Replace("<%cmpNoDiscFlds>", lCmpNoDiscFlds);
+                */
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+
+        public string CmpNoDiscFlds(string pDiscFld, 
+                                    string pAliasFld)
+        {
+            string sqlStm;
+            string res = string.Empty;
+            string colName = string.Empty;
+            bool ft = true;
+
+            try
+            {
+                sqlStm = sqlKeysTable;
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
+                using (DbConnection connection = database.CreateOpenConnection())
+                {
+                    using (DbCommand command = database.CreateCommand(sqlStm, connection))
+                    {
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                colName = Convert.ToString(reader["COLUMN_NAME"]);
+                                if (colName.CompareTo(pDiscFld) != 0)
+                                {
+                                    res += (ft ? string.Empty : " AND " + Environment.NewLine) + pAliasFld + "." +  Convert.ToString(reader["COLUMN_NAME"]) + "  = p" + Convert.ToString(reader["COLUMN_NAME"]);
+                                    ft = false;
+                                }
+
+                            }
+                        }
+                    }
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public string CompareKeys()
         {
             string sqlStm;
@@ -356,8 +443,8 @@ namespace DataLayer
             string sqlStm;
             string scrap;
             string template = " GE_PAMBCOMMON.ADDPARAMNUMBER(pParams => arrParams, " + Environment.NewLine +
-                                                      "     PPARAMNAME => " + lexFldDb + ", " + Environment.NewLine +
-                                                      "     PVALUE => P" + lexFldDb + "); ";
+                                                      "     PPARAMNAME => " + MyStringUtils.entreChar(lexFldDb, '\'') + ", " + Environment.NewLine +
+                                                      "     PVALUE => P" + lexFldDb + ") ";
             bool ft = true;
             try
             {
@@ -408,7 +495,7 @@ namespace DataLayer
                         {
                             while (reader.Read())
                             {
-                                scrap = reader["COLUMN_NAME"] + " => p" + reader["COLUMN_NAME"];
+                                scrap = "p" + reader["COLUMN_NAME"] + " => p" + reader["COLUMN_NAME"];
                                 res += (ft ? string.Empty : ", " + Environment.NewLine) +
                                     scrap;
                                 ft = false;
@@ -425,7 +512,7 @@ namespace DataLayer
             }
         }
 
-        private string stmShowValues(string pColName,
+        private string StmShowValues(string pColName,
                                      string pType)
         {
             string res = string.Empty;
@@ -478,7 +565,7 @@ namespace DataLayer
                                 scrap1 = Convert.ToString(reader["DATA_TYPE"]);
 
 
-                                scrap = stmShowValues(scrap, scrap1);
+                                scrap = StmShowValues(scrap, scrap1);
                                 res += (ft ? string.Empty : " || " + Environment.NewLine) +
                                     scrap;
                                 ft = false;

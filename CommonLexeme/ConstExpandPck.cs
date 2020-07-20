@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic
+namespace CommonLexeme
 {
     public static class ConstExpandPck
     {
+        // noDiscFldsCmp
         public const string lexPackageName = "<%packageName>";
         public const string lexTableName = "<%tableName>";
         public const string lexParamKeyFlds = "<%paramKeyFlds>";
         public const string lexCompareKeys = "<%compareKeys>";
+        public const string lexCmpNoDiscFlds = "<%cmpNoDiscFlds>";
         public const string lexInsertParams = "<%insertParams>";
         public const string lexParamNoDiscFlds = "<%paramNoDiscFlds>";  //TODO: paramNoDiscFlds
         public const string lexParamDiscFlds = "<%paramDiscFlds>";     //TODO: paramDiscFlds
@@ -23,5 +25,8 @@ namespace BusinessLogic
         public const string lexPrintLstKeys = "<%printLstKeys>";
         public const string lexAddKeysParametersInvoke = "<%addKeysParametersInvoke>";
         public const string lexParamKeysCall = "<%paramKeysCall>";
+        public const string lexDiscFlds = "<%discFlds>";
+        public const string lexSqlSelectConsec = "<%smtSelectConsec>";
+        public const string lexAliasTable = "<%aliasTable>";
     }
 }

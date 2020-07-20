@@ -41,6 +41,7 @@ namespace WinFindLexeme
 
         private void DoTlsStrp_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 this.oraMetaBL.TableName = txtTableName.Text;
@@ -54,6 +55,10 @@ namespace WinFindLexeme
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         
@@ -62,7 +67,8 @@ namespace WinFindLexeme
             try
             {
                 this.oraMetaBL.TableName = txtTableName.Text;
-                string scrap = this.oraMetaBL.PrintLstKeys();
+                this.oraMetaBL.DiscFld = txtDiscFld.Text;
+                string scrap = this.oraMetaBL.StmSelectConsec();
                 txtBody.Text = scrap;
             }
             catch (Exception ex)

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessEntity", "BusinessEntity\BusinessEntity.csproj", "{014FAE1B-D3FC-45FA-AEB0-13E2F1A9DAD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLexeme", "CommonLexeme\CommonLexeme.csproj", "{F36F6AEA-681E-406B-80B7-BD89C0A68EA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{014FAE1B-D3FC-45FA-AEB0-13E2F1A9DAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{014FAE1B-D3FC-45FA-AEB0-13E2F1A9DAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{014FAE1B-D3FC-45FA-AEB0-13E2F1A9DAD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F36F6AEA-681E-406B-80B7-BD89C0A68EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F36F6AEA-681E-406B-80B7-BD89C0A68EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F36F6AEA-681E-406B-80B7-BD89C0A68EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F36F6AEA-681E-406B-80B7-BD89C0A68EA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

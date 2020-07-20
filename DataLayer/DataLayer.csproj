@@ -56,6 +56,12 @@
     <Compile Include="OracleMetaDataDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLexeme\CommonLexeme.csproj">
+      <Project>{f36f6aea-681e-406b-80b7-bd89c0a68ea5}</Project>
+      <Name>CommonLexeme</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

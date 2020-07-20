@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using CommonLexeme;
 using DataLayer;
 using System;
 using System.Collections.Generic;
@@ -271,6 +272,15 @@ namespace BusinessLogic
                     case ConstExpandPck.lexParamsNoKeys:
                         res = ParamsNoKeys();
                         break;
+                    case ConstExpandPck.lexCmpNoDiscFlds:
+                        res = CmpNoDiscFlds(this.DiscFld);
+                        break;
+                    case ConstExpandPck.lexDiscFlds:
+                        res = this.DiscFld;
+                        break;
+                    case ConstExpandPck.lexSqlSelectConsec:
+                        res = StmSelectConsec();
+                        break;
                     default:
                         res = "<NO_DEFINIDO>";
                         break;
@@ -283,6 +293,40 @@ namespace BusinessLogic
                 throw;
             }
 
+        }
+
+        public string StmSelectConsec()
+        {
+            string res = string.Empty;
+            try
+            {
+                string lCmpNoDiscFlds = this.oraMetaDL.CmpNoDiscFlds(this.DiscFld, "a");
+                res = this.oraMetaDL.SmtSelectConse(this.DiscFld,
+                                                    this.TableName,
+                                                    lCmpNoDiscFlds,
+                                                    "a");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private string CmpNoDiscFlds(string pDiscFld)
+        {
+            string res = string.Empty;
+            try
+            {
+                res = this.oraMetaDL.CmpNoDiscFlds(pDiscFld, "a");
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private string ParamsNoKeys()

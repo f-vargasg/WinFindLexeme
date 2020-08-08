@@ -100,7 +100,6 @@ namespace DataLayer
 
         public string TableName { get; set; }
 
-
         public string ObtPackageName()
         {
             string res = string.Empty;
@@ -130,8 +129,6 @@ namespace DataLayer
             }
 
         }
-
-
 
         public string ParamKeyFields()
         {
@@ -204,8 +201,7 @@ namespace DataLayer
                 throw;
             }
         }
-
-
+        
         public string SmtSelectConse(string pDiscrFld,
                                 string pTableName,
                                 string pCmpNoDiscFlds,

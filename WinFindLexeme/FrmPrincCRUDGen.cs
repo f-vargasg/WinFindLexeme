@@ -12,7 +12,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WinFindLexeme
+namespace WinFindLexeme 
 {
     public partial class FrmPrincCRUDGen : Form
     {
@@ -66,10 +66,24 @@ namespace WinFindLexeme
         {
             try
             {
+                FrmTestLexeme frm = new FrmTestLexeme();
+
+                frm.TableName = txtTableName.Text;
+                frm.DiscFld = txtDiscFld.Text;
+
+                frm.ShowDialog();
+
+                frm.Dispose();
+
+                
+                /*
                 this.oraMetaBL.TableName = txtTableName.Text;
                 this.oraMetaBL.DiscFld = txtDiscFld.Text;
                 string scrap = this.oraMetaBL.StmSelectConsec();
                 txtBody.Text = scrap;
+                */
+
+
             }
             catch (Exception ex)
             {

@@ -13,7 +13,6 @@ namespace BusinessLogic
     {
         OracleMetaDataDL oraMetaDL;
 
-
         public OracleMetadataBL()
         {
             this.oraMetaDL = new OracleMetaDataDL();
@@ -120,6 +119,7 @@ namespace BusinessLogic
             try
             {
                 res = this.oraMetaDL.GetCodeBasedColumns("ListParamSql", ",", true);
+
                 return res;
             }
             catch (Exception)

@@ -400,7 +400,6 @@ namespace DataLayer
         {
             string sqlStm;
             string res = string.Empty;
-            int contFilas = 0;
             bool ft = true;
 
             try

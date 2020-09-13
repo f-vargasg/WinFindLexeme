@@ -96,9 +96,17 @@ namespace DataLayer
         #endregion
 
 
-
-
         public string TableName { get; set; }
+
+        public string DiscFld { get; set; }
+
+        public OracleMetaDataDL(string pTableName, string pDiscFld)
+        {
+
+            this.TableName = pTableName;
+            this.DiscFld = pDiscFld;
+            
+        }
 
         public string ObtPackageName()
         {
@@ -163,7 +171,7 @@ namespace DataLayer
             }
         }
 
-        public string ParamNoDiscFlds(string pDiscFld)
+        public string ParamNoDiscFlds()
         {
             string sqlStm;
             string res = string.Empty;
@@ -183,7 +191,7 @@ namespace DataLayer
                             while (reader.Read())
                             {
                                 colName = Convert.ToString(reader["COLUMN_NAME"]);
-                                if (colName.CompareTo(pDiscFld) != 0)
+                                if (colName.CompareTo(this.DiscFld) != 0)
                                 {
                                     res += (ft ? string.Empty : ", " + Environment.NewLine) + 'p' + Convert.ToString(reader["COLUMN_NAME"]) + "  IN " + reader["DATA_TYPE"];
                                     ft = false;
@@ -202,10 +210,7 @@ namespace DataLayer
             }
         }
         
-        public string SmtSelectConse(string pDiscrFld,
-                                string pTableName,
-                                string pCmpNoDiscFlds,
-                                string pAliasTable)
+        public string SmtSelectConse(string pAlias)
         {
             string res = "SELECT NVL(MAX(a." + ConstExpandPck.lexDiscFlds + "), 0) + 1 into wres " + Environment.NewLine +
                          "FROM " + ConstExpandPck.lexTableName + " <%aliasTable> " + Environment.NewLine +
@@ -216,10 +221,10 @@ namespace DataLayer
             bool ft;
             try
             {
-                res = res.Replace(ConstExpandPck.lexDiscFlds, pDiscrFld);
-                res = res.Replace(ConstExpandPck.lexTableName, pTableName);
-                res = res.Replace(ConstExpandPck.lexAliasTable, pAliasTable);
-                scrap = CmpNoDiscFlds(pDiscrFld, pAliasTable);
+                res = res.Replace(ConstExpandPck.lexDiscFlds, this.DiscFld);
+                res = res.Replace(ConstExpandPck.lexTableName, this.TableName);
+                res = res.Replace(ConstExpandPck.lexAliasTable, pAlias);
+                scrap = CmpNoDiscFlds(pAlias);
                 res = res.Replace(ConstExpandPck.lexCmpNoDiscFlds, scrap);
                 /*
                 string[] arrDiscFld = pDiscrFld.Split(',');
@@ -245,9 +250,7 @@ namespace DataLayer
 
         }
 
-
-        public string CmpNoDiscFlds(string pDiscFld, 
-                                    string pAliasFld)
+        public string CmpNoDiscFlds(string pAlias)
         {
             string sqlStm;
             string res = string.Empty;
@@ -267,9 +270,9 @@ namespace DataLayer
                             while (reader.Read())
                             {
                                 colName = Convert.ToString(reader["COLUMN_NAME"]);
-                                if (colName.CompareTo(pDiscFld) != 0)
+                                if (colName.CompareTo(this.DiscFld) != 0)
                                 {
-                                    res += (ft ? string.Empty : " AND " + Environment.NewLine) + pAliasFld + "." +  Convert.ToString(reader["COLUMN_NAME"]) + "  = p" + Convert.ToString(reader["COLUMN_NAME"]);
+                                    res += (ft ? string.Empty : " AND " + Environment.NewLine) + pAlias + "." +  Convert.ToString(reader["COLUMN_NAME"]) + "  = p" + Convert.ToString(reader["COLUMN_NAME"]);
                                     ft = false;
                                 }
 
@@ -355,7 +358,7 @@ namespace DataLayer
             }
         }
 
-        public string ParamDiscFlds(object pDiscFld)
+        public string ParamDiscFlds()
         {
             string sqlStm;
             string res = string.Empty;
@@ -375,7 +378,7 @@ namespace DataLayer
                             while (reader.Read())
                             {
                                 colName = Convert.ToString(reader["COLUMN_NAME"]);
-                                if (colName.CompareTo(pDiscFld) == 0)
+                                if (colName.CompareTo(this.DiscFld) == 0)
                                 {
                                     res += (ft ? string.Empty : ", " + Environment.NewLine) + 'p' + Convert.ToString(reader["COLUMN_NAME"]) + "  OUT " + reader["DATA_TYPE"];
                                     ft = false;

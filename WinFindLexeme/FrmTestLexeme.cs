@@ -1,7 +1,9 @@
-﻿using BusinessLogic;
+﻿using BusinessEntity;
+using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,16 +16,19 @@ namespace WinFindLexeme
     public partial class FrmTestLexeme : Form
     {
 
-        public string TableName { get; set; }
-        public string DiscFld { get; set; }
-
-        OracleMetadataBL oBl = new OracleMetadataBL();
-
-
-
+        public OracleTableMetaBL oBl { get; set; }
         public FrmTestLexeme()
         {
             InitializeComponent();
+            InitMyComponents();
+        }
+
+        private void InitMyComponents()
+        {
+            txtOwner.Text = "MYTEST";
+            txtTableName.Text = ConfigurationManager.AppSettings["defTableName"];
+            txtDiscFld.Text = ConfigurationManager.AppSettings["defDiscFld"];
+
         }
 
         private void butOk_Click(object sender, EventArgs e)
@@ -40,7 +45,27 @@ namespace WinFindLexeme
         {
             try
             {
-                this.oBl.ExpandCode(txtBoxLexeme.Text);
+                //this.oBl.ExpandCode(txtBoxLexeme.Text, "a");
+                this.oBl = new OracleTableMetaBL(txtOwner.Text,  txtTableName.Text, txtDiscFld.Text );
+                List<OracleColumnDef> lst = this.oBl.ObtColumnDef();
+                txtOutput.Text += "<<<<<<<<<<<<<<<<<<Columns>>>>>>>>>>>>>>>" + Environment.NewLine ;
+                foreach (var item in lst)
+                {
+                    txtOutput.Text += item.ColumnName + Environment.NewLine;
+                }
+
+                txtOutput.Text += "<<<<<<<<<<<<<<<<<<PK>>>>>>>>>>>>>>>" + Environment.NewLine;
+                List<OraclePkColumnDef> lstPk = new List<OraclePkColumnDef>();
+                foreach (var item in this.oBl.ObtPkColumnDef())
+                {
+                    txtOutput.Text += (item.ColumnName + Environment.NewLine);
+                }
+
+                // pk info
+
+
+
+
             }
             catch (Exception ex)
             {

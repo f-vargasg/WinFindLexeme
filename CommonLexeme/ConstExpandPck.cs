@@ -12,6 +12,8 @@ namespace CommonLexeme
         public const string lexPackageName = "<%packageName>";
         public const string lexTableName = "<%tableName>";
         public const string lexParamKeyFlds = "<%paramKeyFlds>";
+        public const string lexParamTableFlds = "<%paramTableFlds>";
+        public const string lexParamKeysNoDiscFlds = "<%paramKeysNoDiscFlds>";
         public const string lexCompareKeys = "<%compareKeys>";
         public const string lexCmpNoDiscFlds = "<%cmpNoDiscFlds>";
         public const string lexInsertParams = "<%insertParams>";

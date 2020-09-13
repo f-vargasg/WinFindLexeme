@@ -1,4 +1,4 @@
-﻿namespace WinFindLexeme
+﻿namespace WinTestExpader
 {
     partial class FrmTestLexeme
     {
@@ -38,6 +38,8 @@
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDiscFld = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtLexeme = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -61,36 +63,34 @@
             // butOk
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butOk.Location = new System.Drawing.Point(171, 367);
+            this.butOk.Location = new System.Drawing.Point(244, 472);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(116, 59);
             this.butOk.TabIndex = 8;
             this.butOk.Text = "Ok";
             this.butOk.UseVisualStyleBackColor = true;
-            this.butOk.Click += new System.EventHandler(this.butOk_Click);
             // 
             // txtOutput
             // 
             this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutput.Location = new System.Drawing.Point(-1, 163);
+            this.txtOutput.Location = new System.Drawing.Point(-1, 199);
             this.txtOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(674, 183);
+            this.txtOutput.Size = new System.Drawing.Size(936, 252);
             this.txtOutput.TabIndex = 9;
             // 
             // butCancel
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.butCancel.Location = new System.Drawing.Point(401, 367);
+            this.butCancel.Location = new System.Drawing.Point(562, 472);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(116, 59);
             this.butCancel.TabIndex = 10;
             this.butCancel.Text = "Cancel";
             this.butCancel.UseVisualStyleBackColor = true;
-            this.butCancel.Click += new System.EventHandler(this.butCancel_Click);
             // 
             // butDo
             // 
@@ -138,11 +138,31 @@
             this.txtDiscFld.Size = new System.Drawing.Size(527, 26);
             this.txtDiscFld.TabIndex = 15;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 143);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 20);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Lexeme:";
+            // 
+            // txtLexeme
+            // 
+            this.txtLexeme.Location = new System.Drawing.Point(101, 143);
+            this.txtLexeme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtLexeme.Name = "txtLexeme";
+            this.txtLexeme.Size = new System.Drawing.Size(527, 26);
+            this.txtLexeme.TabIndex = 17;
+            // 
             // FrmTestLexeme
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 438);
+            this.ClientSize = new System.Drawing.Size(931, 543);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtLexeme);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtDiscFld);
             this.Controls.Add(this.label2);
@@ -175,5 +195,7 @@
         private System.Windows.Forms.TextBox txtOwner;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDiscFld;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtLexeme;
     }
 }

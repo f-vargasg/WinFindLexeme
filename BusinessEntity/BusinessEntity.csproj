@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OracleColumnDef.cs" />
+    <Compile Include="OraclePkColumnDef.cs" />
     <Compile Include="TokenTemp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -17,11 +17,12 @@ namespace BusinessLogic
         public string Owner { get; set; }
 
         public OracleTableMetaBL(string pOwner, 
-                                  string pTableName)
+                                  string pTableName,
+                                  string pDiscFld)
         {
             this.TableName = pTableName;
             this.Owner = pOwner;
-            this.orTblDef = new OracleTableMetaDL(pOwner, pTableName);
+            this.orTblDef = new OracleTableMetaDL(pOwner, pTableName, pDiscFld);
 
         }
 

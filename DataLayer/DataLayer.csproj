@@ -54,9 +54,14 @@
   <ItemGroup>
     <Compile Include="DataWorker.cs" />
     <Compile Include="OracleMetaDataDL.cs" />
+    <Compile Include="OracleTableMetaDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessEntity\BusinessEntity.csproj">
+      <Project>{014FAE1B-D3FC-45FA-AEB0-13E2F1A9DAD6}</Project>
+      <Name>BusinessEntity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonLexeme\CommonLexeme.csproj">
       <Project>{f36f6aea-681e-406b-80b7-bd89c0a68ea5}</Project>
       <Name>CommonLexeme</Name>

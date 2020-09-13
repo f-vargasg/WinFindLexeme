@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExplodePackageTemplate.cs" />
     <Compile Include="OracleMetadataBL.cs" />
+    <Compile Include="OracleTableMetaBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

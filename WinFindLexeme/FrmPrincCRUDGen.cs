@@ -31,20 +31,21 @@ namespace WinFindLexeme
         {
             this.Text = this.Text + " (" + this.Name + ")";
             this.owner = ConfigurationManager.AppSettings["defOwner"];
+            txtOwner.Text = this.owner;
             // this.oraMetaBL = new OracleMetadataBL(txtTableName.Text, txtDiscFld.Text);
             txtTableName.Text = ConfigurationManager.AppSettings["defTableName"];
             txtDiscFld.Text = ConfigurationManager.AppSettings["defDiscFld"];
-            string pathFileSpec = ConfigurationManager.AppSettings["pathSpec"];
-            txtTempSpec.Text = File.ReadAllText(pathFileSpec);
             this.expandCode = new ExplodePackageTemplate(this.owner, txtTableName.Text, txtDiscFld.Text);
-
+            
             //string pathBodyFile = ConfigurationManager.AppSettings["pathBody"];
-            LoadTemplate();
+            LoadTemplates();
 
         }
 
-        private void LoadTemplate()
+        private void LoadTemplates()
         {
+            string pathFileSpec = ConfigurationManager.AppSettings["pathSpec"];
+            txtTempSpec.Text  = File.ReadAllText(pathFileSpec);
             string pathBodyFile = ConfigurationManager.AppSettings["pathBody"];
             txtTempBod.Text = File.ReadAllText(pathBodyFile);
         }
@@ -56,6 +57,7 @@ namespace WinFindLexeme
             Cursor.Current = Cursors.WaitCursor;
             try
             {
+                LoadTemplates();
                 txtSpec.Text = this.expandCode.ExpandCode(txtTempSpec.Text, "a");
                 txtBody.Text = this.expandCode.ExpandCode(txtTempBod.Text, "a");
 
@@ -88,7 +90,6 @@ namespace WinFindLexeme
                 txtBody.Text = scrap;
                 */
 
-
             }
             catch (Exception ex)
             {
@@ -106,12 +107,41 @@ namespace WinFindLexeme
         {
             try
             {
-                LoadTemplate();
+                LoadTemplates();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        private void ButDo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtOutput.Text = string.Empty;
+                //this.oBl.ExpandCode(txtBoxLexeme.Text, "a");
+                OracleTableMetaBL   oBl = new OracleTableMetaBL(txtOwner.Text, txtTableName.Text, txtDiscFld.Text);
+                txtOutput.Text += "<<<<<<<<<<<<<<<<<<PK>>>>>>>>>>>>>>>" + Environment.NewLine;
+                List<OraclePkColumnDef> lstPk = new List<OraclePkColumnDef>();
+                foreach (var item in oBl.ObtPkColumnDef())
+                {
+                    txtOutput.Text += (item.ColumnName + Environment.NewLine);
+                }
+
+                List<OracleColumnDef> lst = oBl.ObtColumnDef();
+                txtOutput.Text += "<<<<<<<<<<<<<<<<<<Columns>>>>>>>>>>>>>>>" + Environment.NewLine;
+                foreach (var item in lst)
+                {
+                    txtOutput.Text += item.ColumnName + Environment.NewLine;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        
     }
 }

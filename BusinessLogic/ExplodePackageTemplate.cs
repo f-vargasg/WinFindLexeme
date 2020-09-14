@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace BusinessLogic
 {
@@ -84,7 +85,7 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtPkColumnDef();
                 foreach (var item in tblCols)
                 {
-                    res += (ft ? string.Empty : Environment.NewLine + " AND ") + item.ColumnName + " =  p" + item.DataType;
+                    res += (ft ? string.Empty : Environment.NewLine + " AND ") + item.ColumnName + " =  p" + item.ColumnName;
                     ft = false;
                 }
                 return res;
@@ -122,7 +123,7 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtColumnDef();
                 foreach (var item in tblCols)
                 {
-                    res += (ft ? string.Empty : ", " + Environment.NewLine) + item.ColumnName ;
+                    res += (ft ? string.Empty : ", " + Environment.NewLine) + item.ColumnName;
                     ft = false;
                 }
                 return res;
@@ -141,11 +142,10 @@ namespace BusinessLogic
             bool ft = true;
             try
             {
-                string scrap = "hola".ToUpper();
                 tblCols = this.oraTblMeta.ObtColumnDef();
                 foreach (var item in tblCols)
                 {
-                    res += (ft ? string.Empty : ", " + Environment.NewLine) + 
+                    res += (ft ? string.Empty : ", " + Environment.NewLine) +
                         (item.ColumnName.ToUpper().Equals(("COD_REGISTRO_N".ToUpper())) ? "w" : "p") + item.ColumnName;
                     ft = false;
                 }
@@ -176,10 +176,20 @@ namespace BusinessLogic
 
         public string TblModifyFlds()
         {
+            List<OracleColumnDef> tblCols = null;
             string res = string.Empty;
+            bool ft = true;
             try
             {
-                // res = this.oraMetaDL.GetCodeBasedColumns("", ",", false);
+                tblCols = this.oraTblMeta.ObtNoKeyColumnDef();
+                foreach (var item in tblCols)
+                {
+                    res += (ft ? string.Empty : ", " + Environment.NewLine) +
+                         item.ColumnName + " = " +
+                         (item.ColumnName.Equals("COD_REGISTRO_N".ToUpper()) ? "w" : "p")
+                         + item.ColumnName;
+                    ft = false;
+                }
                 return res;
             }
             catch (Exception)
@@ -206,10 +216,27 @@ namespace BusinessLogic
 
         public string AddKeysParametersInvoke()
         {
+            const string lexFldDb = "<%fldDb>";
             string res = string.Empty;
+            string scrap = string.Empty;
+            List<OraclePkColumnDef> tblCols = null;
+            string template = " GE_PAMBCOMMON.ADDPARAMNUMBER(pParams => arrParams, " + Environment.NewLine +
+                                                      "     PPARAMNAME => " + MyStringUtils.entreChar(lexFldDb, '\'') + ", " + Environment.NewLine +
+                                                      "     PVALUE => P" + lexFldDb + ") ";
+            bool ft = true;
             try
             {
-                // res = this.oraMetaDL.AddKeysParametersInvoke();
+                tblCols = this.oraTblMeta.ObtPkColumnDef();
+                foreach (var item in tblCols)
+                {
+                    scrap = template;
+
+                    scrap = scrap.Replace(lexFldDb, item.ColumnName);
+                    res += (ft? string.Empty : Environment.NewLine + "; ") +
+                        scrap;
+                    ft = false; 
+                }
+
                 return res;
             }
             catch (Exception)
@@ -222,9 +249,22 @@ namespace BusinessLogic
         public string ParamKeysCall()
         {
             string res = string.Empty;
+            string scrap = string.Empty;
+            List<OraclePkColumnDef> tblCols = null;
+
+            bool ft = true;
             try
             {
-                // res = this.oraMetaDL.ParamKeysCall();
+                tblCols = this.oraTblMeta.ObtPkColumnDef();
+                foreach (var item in tblCols)
+                {
+
+                    res += (ft ? string.Empty : Environment.NewLine + ", ") +
+                        "p" + item.ColumnName + " => " + 
+                         (item.ColumnName.Equals("COD_REGISTRO_N".ToUpper()) ? "w" : "p") + item.ColumnName;
+                    ft = false;
+                }
+
                 return res;
             }
             catch (Exception)
@@ -278,31 +318,37 @@ namespace BusinessLogic
                     case ConstExpandPck.lexCompareKeys:
                         res = CompareKeys();
                         break;
+                    case ConstExpandPck.lexParamDefInsert:
+                        res = ParamDefInsert();
+                        break;
+                    case ConstExpandPck.lexAsignaDiscFlds:
+                        res = AsignaDiscFlds();
+                        break;
                     /*case ConstExpandPck.lexInsertParams:
                         res = InsertParams();
                         break; */
                     case ConstExpandPck.lexTblInsertFlds:
                         res = TblInsertFlds();
                         break;
-                     case ConstExpandPck.lexParamsToInserta:
+                    case ConstExpandPck.lexParamsToInserta:
                         res = ParamsToInserta();
                         break; /*
                     case ConstExpandPck.lexModifyParams:
                         res = ModifyParams();
-                        break;
+                        break;*/
                     case ConstExpandPck.lexTblModifyFlds:
                         res = TblModifyFlds();
                         break;
-                    case ConstExpandPck.lexPrintLstKeys:
+                    /* case ConstExpandPck.lexPrintLstKeys:
                         res = PrintLstKeys();
-                        break;
+                        break; */
                     case ConstExpandPck.lexAddKeysParametersInvoke:
                         res = AddKeysParametersInvoke();
                         break;
-                    case ConstExpandPck.lexParamKeysCall:
+                     case ConstExpandPck.lexParamKeysCall:
                         res = ParamKeysCall();
                         break;
-                    case ConstExpandPck.lexParamNoDiscFlds:
+                    /* case ConstExpandPck.lexParamNoDiscFlds:
                         res = ParamNoDiscFlds();
                         break; */
                     case ConstExpandPck.lexParamDiscFlds:
@@ -311,14 +357,14 @@ namespace BusinessLogic
                     case ConstExpandPck.lexParamsNoKeys:
                         res = ParamsNoKeys();
                         break;
-                    
-            case ConstExpandPck.lexCmpNoDiscFlds:
-                res = CmpNoDiscFlds(pAlias);
-                break;
-                        /*
-            case ConstExpandPck.lexDiscFlds:
-                res = this.DiscFld;
-                break; */
+
+                    case ConstExpandPck.lexCmpNoDiscFlds:
+                        res = CmpNoDiscFlds(pAlias);
+                        break;
+                    /*
+        case ConstExpandPck.lexDiscFlds:
+            res = this.DiscFld;
+            break; */
                     case ConstExpandPck.lexSqlSelectConsec:
                         res = StmSelectConsec(pAlias);
                         break;
@@ -337,6 +383,48 @@ namespace BusinessLogic
 
         }
 
+        private string ParamDefInsert()
+        {
+            string res = string.Empty;
+            string scrapTmp = string.Empty;
+            try
+            {
+                scrapTmp = ParamKeysNoDiscFlds();
+                res += scrapTmp;
+
+                scrapTmp = ParamDiscFlds();
+                res += (res.Length > 0 ? "," : string.Empty) + scrapTmp;
+
+                scrapTmp = ParamsNoKeys();
+                res += (res.Length > 0 ? "," : string.Empty) + scrapTmp;
+
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private string AsignaDiscFlds()
+        {
+            string res = string.Empty;
+            string scrap = string.Empty;
+            try
+            {
+                scrap = ParamCallConsecFunc();
+                scrap = (scrap.Length > 0 ? "(" : string.Empty) + scrap + (scrap.Length > 0 ? ")" : string.Empty);
+                res = "p" + this.DiscFld + " := Consecutivo " + scrap;
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private string ParamTableFlds()
         {
             List<OracleColumnDef> tblCols = null;
@@ -348,7 +436,9 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtColumnDef();
                 foreach (var item in tblCols)
                 {
-                    res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType);
+                    res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType
+                              + (item.ColumnName.Equals("COD_REGISTRO_N".ToUpper()) ? " DEFAULT NULL" : string.Empty)
+                            );
                     ft = false;
                 }
                 return res;
@@ -388,7 +478,7 @@ namespace BusinessLogic
 
         public string StmSelectConsec(string pAlias)
         {
-            string res = "SELECT NVL(MAX("+ ConstExpandPck.lexAliasTable  + "." + ConstExpandPck.lexDiscFlds + "), 0) + 1 into wres " + Environment.NewLine +
+            string res = "SELECT NVL(MAX(" + ConstExpandPck.lexAliasTable + "." + ConstExpandPck.lexDiscFlds + "), 0) + 1 into wres " + Environment.NewLine +
                          "FROM " + ConstExpandPck.lexTableName + " <%aliasTable> " + Environment.NewLine +
                          "WHERE " + ConstExpandPck.lexCmpNoDiscFlds;
             string lDiscFlds = string.Empty; ;
@@ -463,7 +553,9 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtNoKeyColumnDef();
                 foreach (var item in tblCols)
                 {
-                    res += ((ft ? string.Empty : ", " + Environment.NewLine) + item.ColumnName + " IN p" + item.ColumnName);
+                    res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType +
+                         (item.ColumnName.Equals("COD_REGISTRO_N".ToUpper()) ? " DEFAULT NULL" : string.Empty)
+                        );
                     ft = false;
                 }
                 return res;
@@ -488,6 +580,32 @@ namespace BusinessLogic
                     if (item.ColumnName.CompareTo(this.DiscFld) == 0)
                     {
                         res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " OUT " + item.DataType);
+                        ft = false;
+                    }
+
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private string ParamCallConsecFunc()
+        {
+            List<OraclePkColumnDef> tblCols = null;
+            string res = string.Empty;
+            bool ft = true;
+            try
+            {
+                tblCols = this.oraTblMeta.ObtPkColumnDef();
+                foreach (var item in tblCols)
+                {
+                    if (item.ColumnName.CompareTo(this.DiscFld) != 0)
+                    {
+                        res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " => " + "p" + item.ColumnName);
                         ft = false;
                     }
 

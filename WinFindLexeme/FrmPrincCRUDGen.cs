@@ -58,6 +58,8 @@ namespace WinFindLexeme
             try
             {
                 LoadTemplates();
+                this.expandCode.TableName = txtTableName.Text;
+                this.expandCode.DiscFld = txtDiscFld.Text;
                 txtSpec.Text = this.expandCode.ExpandCode(txtTempSpec.Text, "a");
                 txtBody.Text = this.expandCode.ExpandCode(txtTempBod.Text, "a");
 

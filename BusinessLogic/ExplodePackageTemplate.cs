@@ -16,10 +16,16 @@ namespace BusinessLogic
     {
         // OracleMetaDataDL oracleMetaDataDL;
         OracleTableMetaDL oraTblMeta;
-        public String DiscFld { get => this.oraTblMeta.DiscFld; }
 
-        public string TableName { get => this.oraTblMeta.TableName; }
-
+        
+        public string TableName {
+            get { return this.oraTblMeta.TableName; }
+            set { this.oraTblMeta.TableName = value; }
+        }
+        public string DiscFld {
+            get { return this.oraTblMeta.DiscFld; }
+            set { this.oraTblMeta.DiscFld = value; }
+        }
 
         public ExplodePackageTemplate(string pOwner, string pTableName, string pDiscFld)
         {
@@ -199,12 +205,56 @@ namespace BusinessLogic
             }
         }
 
-        public string PrintLstKeys()
+        private string StmShowValues(string pColName,
+                                    string pType)
         {
-            string res = string.Empty;
             try
             {
-                //  res = this.oraMetaDL.PrintLstKeys();
+                string res = "' " + pColName + " = ' || ";
+                switch (pType)
+                {
+                    case "VARCHAR2":
+                        res += ("p" + pColName);
+                        break;
+                    case "NUMBER":
+                        res += ("TO_CHAR(p" + pColName + ")");
+                        break;
+                    case "DATE":
+                        res += ("TO_DATE(p" + pColName + ", 'DD/MM/RRRR')");
+                        break;
+                    default:
+                        break;
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public string PrintLstKeys()
+        {
+            List<OraclePkColumnDef> tblCols = null;
+            string res = string.Empty;
+            string scrap = string.Empty;
+            string scrap1 = string.Empty;
+            bool ft = true;
+            try
+            {
+
+                tblCols = this.oraTblMeta.ObtPkColumnDef();
+                foreach (var item in tblCols)
+                {
+                    scrap =item.ColumnName;
+                    scrap1 = item.DataType;
+
+
+                    scrap = StmShowValues(scrap, scrap1);
+                    res += (ft ? string.Empty : " || " + Environment.NewLine) +
+                        scrap;
+                    ft = false;
+                }
                 return res;
             }
             catch (Exception)
@@ -339,9 +389,9 @@ namespace BusinessLogic
                     case ConstExpandPck.lexTblModifyFlds:
                         res = TblModifyFlds();
                         break;
-                    /* case ConstExpandPck.lexPrintLstKeys:
+                     case ConstExpandPck.lexPrintLstKeys:
                         res = PrintLstKeys();
-                        break; */
+                        break; 
                     case ConstExpandPck.lexAddKeysParametersInvoke:
                         res = AddKeysParametersInvoke();
                         break;

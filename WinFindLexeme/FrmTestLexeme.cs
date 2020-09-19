@@ -72,5 +72,17 @@ namespace WinFindLexeme
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private int OptionalArgs (int p1 = 2, int p2 =4)
+        {
+            return p1 + p2;
+        }
+
+
+        private void butTestOptParams_Click(object sender, EventArgs e)
+        {
+            int res = OptionalArgs(p2:14);
+            MessageBox.Show(res.ToString());
+        }
     }
 }

@@ -38,6 +38,7 @@
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDiscFld = new System.Windows.Forms.TextBox();
+            this.butTestOptParams = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -138,11 +139,22 @@
             this.txtDiscFld.Size = new System.Drawing.Size(527, 26);
             this.txtDiscFld.TabIndex = 15;
             // 
+            // butTestOptParams
+            // 
+            this.butTestOptParams.Location = new System.Drawing.Point(128, 2);
+            this.butTestOptParams.Name = "butTestOptParams";
+            this.butTestOptParams.Size = new System.Drawing.Size(76, 30);
+            this.butTestOptParams.TabIndex = 16;
+            this.butTestOptParams.Text = "Opt.Params";
+            this.butTestOptParams.UseVisualStyleBackColor = true;
+            this.butTestOptParams.Click += new System.EventHandler(this.butTestOptParams_Click);
+            // 
             // FrmTestLexeme
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 438);
+            this.Controls.Add(this.butTestOptParams);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtDiscFld);
             this.Controls.Add(this.label2);
@@ -175,5 +187,6 @@
         private System.Windows.Forms.TextBox txtOwner;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDiscFld;
+        private System.Windows.Forms.Button butTestOptParams;
     }
 }

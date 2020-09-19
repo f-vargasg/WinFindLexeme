@@ -32,5 +32,6 @@ namespace CommonLexeme
         public const string lexAliasTable = "<%aliasTable>";
         public const string lexAsignaDiscFlds = "<%asignaDiscFlds>";
         public const string lexParamDefInsert = "<%paramDefInsert>";
+        public const string lexParamConsecFunc = "<%paramConsecFunc>";
     }
 }

@@ -48,12 +48,12 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtTempBod = new System.Windows.Forms.TextBox();
             this.TestTbPg = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLexeme = new System.Windows.Forms.TextBox();
+            this.butDo = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
-            this.butDo = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtLexeme = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.TemplatesTab.SuspendLayout();
             this.SpecTempTbPg.SuspendLayout();
@@ -100,8 +100,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExittlsStr,
             this.DoTlsStrp,
-            this.TestTlsStrp,
-            this.LoadTempTlsStrp});
+            this.LoadTempTlsStrp,
+            this.TestTlsStrp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1086, 25);
@@ -286,6 +286,34 @@
             this.TestTbPg.Text = "Test Lexemes";
             this.TestTbPg.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 61);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 20);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Lexeme";
+            // 
+            // txtLexeme
+            // 
+            this.txtLexeme.Location = new System.Drawing.Point(118, 61);
+            this.txtLexeme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtLexeme.Name = "txtLexeme";
+            this.txtLexeme.Size = new System.Drawing.Size(527, 26);
+            this.txtLexeme.TabIndex = 25;
+            // 
+            // butDo
+            // 
+            this.butDo.Location = new System.Drawing.Point(29, 96);
+            this.butDo.Name = "butDo";
+            this.butDo.Size = new System.Drawing.Size(76, 30);
+            this.butDo.TabIndex = 23;
+            this.butDo.Text = "do";
+            this.butDo.UseVisualStyleBackColor = true;
+            this.butDo.Click += new System.EventHandler(this.ButDo_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -315,34 +343,6 @@
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.Size = new System.Drawing.Size(1062, 346);
             this.txtOutput.TabIndex = 18;
-            // 
-            // butDo
-            // 
-            this.butDo.Location = new System.Drawing.Point(29, 96);
-            this.butDo.Name = "butDo";
-            this.butDo.Size = new System.Drawing.Size(76, 30);
-            this.butDo.TabIndex = 23;
-            this.butDo.Text = "do";
-            this.butDo.UseVisualStyleBackColor = true;
-            this.butDo.Click += new System.EventHandler(this.ButDo_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 61);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 20);
-            this.label3.TabIndex = 24;
-            this.label3.Text = "Lexeme";
-            // 
-            // txtLexeme
-            // 
-            this.txtLexeme.Location = new System.Drawing.Point(118, 61);
-            this.txtLexeme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtLexeme.Name = "txtLexeme";
-            this.txtLexeme.Size = new System.Drawing.Size(527, 26);
-            this.txtLexeme.TabIndex = 25;
             // 
             // FrmPrincCRUDGen
             // 

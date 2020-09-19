@@ -6,6 +6,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Utilities;
@@ -416,9 +417,11 @@ namespace BusinessLogic
             res = this.DiscFld;
             break; */
                     case ConstExpandPck.lexSqlSelectConsec:
-                        res = StmSelectConsec(pAlias);
+                        res = SqlSelectConsec(pAlias);
                         break;
-
+                    case ConstExpandPck.lexParamConsecFunc:
+                        res = ParamConsecFunc();
+                        break;
                     default:
                         res = "<NO_DEFINIDO>";
                         break;
@@ -431,6 +434,25 @@ namespace BusinessLogic
                 throw;
             }
 
+        }
+
+        private string ParamConsecFunc()
+        {
+            string res = string.Empty;
+            string scrap = string.Empty;
+            try
+            {
+                // res = "FUNCTION CONSECUTIVO <%paramKeysNoDiscFlds> RETURN NUMBER";
+                res = "FUNCTION CONSECUTIVO " +  ConstExpandPck.lexParamKeysNoDiscFlds + " RETURN NUMBER";
+                scrap = ParamKeysNoDiscFlds();
+                scrap = (scrap.Length > 0 ? "(" + scrap + ")" : scrap);
+                res = res.Replace(ConstExpandPck.lexParamKeysNoDiscFlds, scrap);
+                return res;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private string ParamDefInsert()
@@ -526,11 +548,11 @@ namespace BusinessLogic
             }
         }
 
-        public string StmSelectConsec(string pAlias)
+        public string SqlSelectConsec(string pAlias)
         {
             string res = "SELECT NVL(MAX(" + ConstExpandPck.lexAliasTable + "." + ConstExpandPck.lexDiscFlds + "), 0) + 1 into wres " + Environment.NewLine +
                          "FROM " + ConstExpandPck.lexTableName + " <%aliasTable> " + Environment.NewLine +
-                         "WHERE " + ConstExpandPck.lexCmpNoDiscFlds;
+                          ConstExpandPck.lexCmpNoDiscFlds;
             string lDiscFlds = string.Empty; ;
             string lCmpNoDiscFlds = string.Empty;
             string scrap = string.Empty;
@@ -541,6 +563,7 @@ namespace BusinessLogic
                 res = res.Replace(ConstExpandPck.lexTableName, this.TableName);
                 res = res.Replace(ConstExpandPck.lexAliasTable, pAlias);
                 scrap = CmpNoDiscFlds(pAlias);
+                scrap = (scrap.Length > 0 ? "WHERE " + scrap : scrap);
                 res = res.Replace(ConstExpandPck.lexCmpNoDiscFlds, scrap);
                 /*
                 string[] arrDiscFld = pDiscrFld.Split(',');

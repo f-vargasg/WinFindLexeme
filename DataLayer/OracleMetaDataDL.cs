@@ -11,6 +11,7 @@ using Utilities;
 
 namespace DataLayer
 {
+   
     public class OracleMetaDataDL : DataWorker
     {
 
@@ -112,7 +113,7 @@ namespace DataLayer
         {
             string res = string.Empty;
             string scrap = this.TableName;
-            int inic = -1;
+           // int inic = -1;
             int fin = -1;
             try
             {
@@ -218,7 +219,7 @@ namespace DataLayer
             string lDiscFlds = string.Empty; ;
             string lCmpNoDiscFlds = string.Empty;
             string scrap = string.Empty;
-            bool ft;
+            //bool ft;
             try
             {
                 res = res.Replace(ConstExpandPck.lexDiscFlds, this.DiscFld);

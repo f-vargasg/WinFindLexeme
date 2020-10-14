@@ -11,7 +11,8 @@ using Utilities;
 
 namespace DataLayer
 {
-   
+
+    [Obsolete("OracleMetaDataDL Not used any more", true)]
     public class OracleMetaDataDL : DataWorker
     {
 

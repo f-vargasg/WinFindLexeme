@@ -6,7 +6,9 @@ using System.Xml.Serialization;
 
 namespace BusinessEntity
 {
+#pragma warning disable CS0659 // 'TokenTemp' invalida Object.Equals(object o) pero no invalida Object.GetHashCode()
     public class TokenTemp
+#pragma warning restore CS0659 // 'TokenTemp' invalida Object.Equals(object o) pero no invalida Object.GetHashCode()
     {
         public TokenTemp(string lexema)
         {

@@ -700,7 +700,9 @@ namespace BusinessLogic
             int vcb = 0;
             int inic = 0;
             int fin = 0;
+#pragma warning disable CS0219 // La variable 'tolerancia' está asignada pero su valor nunca se usa
             int tolerancia = 10000;
+#pragma warning restore CS0219 // La variable 'tolerancia' está asignada pero su valor nunca se usa
             int cont = 0;
             try
             {

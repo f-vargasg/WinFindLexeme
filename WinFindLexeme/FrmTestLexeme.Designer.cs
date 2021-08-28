@@ -1,4 +1,4 @@
-﻿namespace WinFindLexeme
+﻿namespace WinOraclePackage
 {
     partial class FrmTestLexeme
     {

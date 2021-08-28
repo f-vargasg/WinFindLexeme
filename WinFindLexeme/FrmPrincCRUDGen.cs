@@ -12,7 +12,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WinFindLexeme
+namespace WinOraclePackage
 {
     public partial class FrmPrincCRUDGen : Form
     {

@@ -28,8 +28,8 @@ namespace DataLayer
                          " cols.position, cons.status, cons.owner \n" +
                          " FROM all_constraints cons, all_cons_columns cols, all_tab_columns tabcols \n" +
                            "  WHERE \n" +
-                "  tabcols.owner = '" + lexOwner + "' \n" +
-                "  AND cols.table_name = '" + lexTableName + "' \n" +
+                "  tabcols.owner = UPPER('" + lexOwner + "') \n" +
+                "  AND cols.table_name = UPPER('" + lexTableName + "') \n" +
                 "  AND cons.constraint_type = 'P' \n" +
                 "  AND cons.constraint_name = cols.constraint_name \n" +
                 "  AND cons.owner = cols.owner \n" +

@@ -48,6 +48,10 @@ namespace BusinessLogic
                     int lenStr = scrap.Length - (pos + 1);
                     res = res + "P" + scrap.Substring(pos + 1, lenStr);
                 }
+                else
+                {
+                    res = ("pck_"+ this.TableName);
+                }
 
                 return res;
             }

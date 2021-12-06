@@ -387,10 +387,10 @@ namespace BusinessLogic
                         break;
                     case ConstExpandPck.lexParamsToInserta:
                         res = ParamsToInserta();
-                        break; /*
+                        break; 
                     case ConstExpandPck.lexModifyParams:
                         res = ModifyParams();
-                        break;*/
+                        break;
                     case ConstExpandPck.lexTblModifyFlds:
                         res = TblModifyFlds();
                         break;

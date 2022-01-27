@@ -35,8 +35,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ExittlsStr = new System.Windows.Forms.ToolStripButton();
             this.DoTlsStrp = new System.Windows.Forms.ToolStripButton();
-            this.TestTlsStrp = new System.Windows.Forms.ToolStripButton();
             this.LoadTempTlsStrp = new System.Windows.Forms.ToolStripButton();
+            this.TestTlsStrp = new System.Windows.Forms.ToolStripButton();
             this.txtSpec = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDiscFld = new System.Windows.Forms.TextBox();
@@ -51,9 +51,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtLexeme = new System.Windows.Forms.TextBox();
             this.butDo = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtOwner = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtOwner = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.TemplatesTab.SuspendLayout();
             this.SpecTempTbPg.SuspendLayout();
@@ -82,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 31);
+            this.label1.Location = new System.Drawing.Point(31, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 20);
             this.label1.TabIndex = 3;
@@ -90,10 +90,10 @@
             // 
             // txtTableName
             // 
-            this.txtTableName.Location = new System.Drawing.Point(156, 28);
+            this.txtTableName.Location = new System.Drawing.Point(158, 66);
             this.txtTableName.Name = "txtTableName";
             this.txtTableName.Size = new System.Drawing.Size(502, 26);
-            this.txtTableName.TabIndex = 4;
+            this.txtTableName.TabIndex = 2;
             // 
             // toolStrip1
             // 
@@ -130,17 +130,6 @@
             this.DoTlsStrp.ToolTipText = "Do Process";
             this.DoTlsStrp.Click += new System.EventHandler(this.DoTlsStrp_Click);
             // 
-            // TestTlsStrp
-            // 
-            this.TestTlsStrp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TestTlsStrp.Image = ((System.Drawing.Image)(resources.GetObject("TestTlsStrp.Image")));
-            this.TestTlsStrp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TestTlsStrp.Name = "TestTlsStrp";
-            this.TestTlsStrp.Size = new System.Drawing.Size(23, 22);
-            this.TestTlsStrp.Text = "toolStripButton2";
-            this.TestTlsStrp.ToolTipText = "Test";
-            this.TestTlsStrp.Click += new System.EventHandler(this.TestTlsStrp_Click);
-            // 
             // LoadTempTlsStrp
             // 
             this.LoadTempTlsStrp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -152,6 +141,17 @@
             this.LoadTempTlsStrp.ToolTipText = "Load Template";
             this.LoadTempTlsStrp.Click += new System.EventHandler(this.LoadTempTlsStrp_Click);
             // 
+            // TestTlsStrp
+            // 
+            this.TestTlsStrp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TestTlsStrp.Image = ((System.Drawing.Image)(resources.GetObject("TestTlsStrp.Image")));
+            this.TestTlsStrp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TestTlsStrp.Name = "TestTlsStrp";
+            this.TestTlsStrp.Size = new System.Drawing.Size(23, 22);
+            this.TestTlsStrp.Text = "toolStripButton2";
+            this.TestTlsStrp.ToolTipText = "Test";
+            this.TestTlsStrp.Click += new System.EventHandler(this.TestTlsStrp_Click);
+            // 
             // txtSpec
             // 
             this.txtSpec.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -159,13 +159,13 @@
             this.txtSpec.Multiline = true;
             this.txtSpec.Name = "txtSpec";
             this.txtSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSpec.Size = new System.Drawing.Size(1063, 237);
+            this.txtSpec.Size = new System.Drawing.Size(1063, 222);
             this.txtSpec.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 75);
+            this.label2.Location = new System.Drawing.Point(31, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 20);
             this.label2.TabIndex = 6;
@@ -173,10 +173,10 @@
             // 
             // txtDiscFld
             // 
-            this.txtDiscFld.Location = new System.Drawing.Point(156, 72);
+            this.txtDiscFld.Location = new System.Drawing.Point(158, 107);
             this.txtDiscFld.Name = "txtDiscFld";
             this.txtDiscFld.Size = new System.Drawing.Size(502, 26);
-            this.txtDiscFld.TabIndex = 7;
+            this.txtDiscFld.TabIndex = 3;
             // 
             // TemplatesTab
             // 
@@ -186,10 +186,10 @@
             this.TemplatesTab.Controls.Add(this.SpecTempTbPg);
             this.TemplatesTab.Controls.Add(this.BodyTempTbPg);
             this.TemplatesTab.Controls.Add(this.TestTbPg);
-            this.TemplatesTab.Location = new System.Drawing.Point(9, 108);
+            this.TemplatesTab.Location = new System.Drawing.Point(9, 139);
             this.TemplatesTab.Name = "TemplatesTab";
             this.TemplatesTab.SelectedIndex = 0;
-            this.TemplatesTab.Size = new System.Drawing.Size(1077, 521);
+            this.TemplatesTab.Size = new System.Drawing.Size(1077, 490);
             this.TemplatesTab.TabIndex = 5;
             // 
             // SpecTempTbPg
@@ -198,7 +198,7 @@
             this.SpecTempTbPg.Location = new System.Drawing.Point(4, 29);
             this.SpecTempTbPg.Name = "SpecTempTbPg";
             this.SpecTempTbPg.Padding = new System.Windows.Forms.Padding(3);
-            this.SpecTempTbPg.Size = new System.Drawing.Size(1069, 488);
+            this.SpecTempTbPg.Size = new System.Drawing.Size(1069, 457);
             this.SpecTempTbPg.TabIndex = 0;
             this.SpecTempTbPg.Text = "Spec Template";
             this.SpecTempTbPg.UseVisualStyleBackColor = true;
@@ -217,8 +217,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.txtSpec);
-            this.splitContainer3.Size = new System.Drawing.Size(1063, 482);
-            this.splitContainer3.SplitterDistance = 241;
+            this.splitContainer3.Size = new System.Drawing.Size(1063, 451);
+            this.splitContainer3.SplitterDistance = 225;
             this.splitContainer3.TabIndex = 3;
             // 
             // txtTempSpec
@@ -228,7 +228,7 @@
             this.txtTempSpec.Multiline = true;
             this.txtTempSpec.Name = "txtTempSpec";
             this.txtTempSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempSpec.Size = new System.Drawing.Size(1063, 241);
+            this.txtTempSpec.Size = new System.Drawing.Size(1063, 225);
             this.txtTempSpec.TabIndex = 1;
             // 
             // BodyTempTbPg
@@ -275,13 +275,11 @@
             this.TestTbPg.Controls.Add(this.label3);
             this.TestTbPg.Controls.Add(this.txtLexeme);
             this.TestTbPg.Controls.Add(this.butDo);
-            this.TestTbPg.Controls.Add(this.label4);
-            this.TestTbPg.Controls.Add(this.txtOwner);
             this.TestTbPg.Controls.Add(this.txtOutput);
             this.TestTbPg.Location = new System.Drawing.Point(4, 29);
             this.TestTbPg.Name = "TestTbPg";
             this.TestTbPg.Padding = new System.Windows.Forms.Padding(3);
-            this.TestTbPg.Size = new System.Drawing.Size(1069, 488);
+            this.TestTbPg.Size = new System.Drawing.Size(1069, 457);
             this.TestTbPg.TabIndex = 2;
             this.TestTbPg.Text = "Test Lexemes";
             this.TestTbPg.UseVisualStyleBackColor = true;
@@ -289,7 +287,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 61);
+            this.label3.Location = new System.Drawing.Point(25, 28);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
@@ -298,7 +296,7 @@
             // 
             // txtLexeme
             // 
-            this.txtLexeme.Location = new System.Drawing.Point(118, 61);
+            this.txtLexeme.Location = new System.Drawing.Point(120, 28);
             this.txtLexeme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLexeme.Name = "txtLexeme";
             this.txtLexeme.Size = new System.Drawing.Size(527, 26);
@@ -306,7 +304,7 @@
             // 
             // butDo
             // 
-            this.butDo.Location = new System.Drawing.Point(29, 96);
+            this.butDo.Location = new System.Drawing.Point(29, 68);
             this.butDo.Name = "butDo";
             this.butDo.Size = new System.Drawing.Size(76, 30);
             this.butDo.TabIndex = 23;
@@ -314,41 +312,42 @@
             this.butDo.UseVisualStyleBackColor = true;
             this.butDo.Click += new System.EventHandler(this.ButDo_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 25);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 20);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Owner";
-            // 
-            // txtOwner
-            // 
-            this.txtOwner.Location = new System.Drawing.Point(118, 25);
-            this.txtOwner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtOwner.Name = "txtOwner";
-            this.txtOwner.Size = new System.Drawing.Size(527, 26);
-            this.txtOwner.TabIndex = 20;
-            // 
             // txtOutput
             // 
             this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutput.Location = new System.Drawing.Point(7, 134);
+            this.txtOutput.Location = new System.Drawing.Point(7, 106);
             this.txtOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(1062, 346);
+            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtOutput.Size = new System.Drawing.Size(1062, 343);
             this.txtOutput.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(31, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Owner:";
+            // 
+            // txtOwner
+            // 
+            this.txtOwner.Location = new System.Drawing.Point(158, 28);
+            this.txtOwner.Name = "txtOwner";
+            this.txtOwner.Size = new System.Drawing.Size(502, 26);
+            this.txtOwner.TabIndex = 1;
             // 
             // FrmPrincCRUDGen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1086, 632);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtOwner);
             this.Controls.Add(this.TemplatesTab);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDiscFld);
@@ -405,12 +404,12 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.TabPage TestTbPg;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtOwner;
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Button butDo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtLexeme;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtOwner;
     }
 }
 

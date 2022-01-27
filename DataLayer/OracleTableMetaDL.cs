@@ -19,8 +19,8 @@ namespace DataLayer
         private const string sqlBase =
                 "select a.* \n" +
                 " FROM ALL_TAB_COLUMNS a \n" +
-                        "where a.TABLE_NAME = '" + lexTableName + "' \n" +
-                        "and a.OWNER = '" + lexOwner + "' \n";
+                        "where a.TABLE_NAME = UPPER('" + lexTableName + "') \n" +
+                        "and a.OWNER = UPPER('" + lexOwner + "') \n";
         #endregion SQL Base
 
         #region SQL Keys
@@ -51,8 +51,8 @@ namespace DataLayer
                                         " --cols.position, cons.status  \n" +
                                         " FROM all_constraints cons, all_cons_columns cols, all_tab_columns tabcols  \n" +
                                            " WHERE  \n" +
-                                           " cols.table_name = '" + lexTableName + "'  \n" +
-                                           " AND CONS.OWNER = 'MYTEST'  \n" +
+                                           " cols.table_name = UPPER('" + lexTableName + "')  \n" +
+                                           " AND CONS.OWNER = UPPER('" +  lexOwner  +"')  \n" +
                                         " AND cons.constraint_type = 'P' \n" +
                                         " AND cons.constraint_name = cols.constraint_name  \n" +
                                         "  AND cons.owner = cols.owner  \n" +
@@ -196,14 +196,14 @@ namespace DataLayer
                 res = new List<OracleColumnDef>();
                 sqlStm = "Select a.* \n" +
                         "from all_tab_columns a  \n" +
-                        "where a.table_name = '" + lexTableName + "'  \n" +
-                        "AND a.owner = '" + lexOwner + "'  \n" +
+                        "where a.table_name = UPPER('" + lexTableName + "')  \n" +
+                        "AND a.owner = UPPER('" + lexOwner + "')  \n" +
                         "and not exists (  \n" +
                         "    SELECT 1  \n" +
                         "    FROM all_constraints cons, all_cons_columns cols, all_tab_columns tabcols  \n" +
                         "    WHERE  \n" +
-                        "    cons.table_name = '"+ lexTableName + "'\n" +
-                        "    AND cons.owner = '" + lexOwner + "'  AND  \n" +
+                        "    cons.table_name = UPPER('"+ lexTableName + "')\n" +
+                        "    AND cons.owner = UPPER('" + lexOwner + "')  AND  \n" +
                         "    cons.constraint_type = 'P' and \n" +
                         "    cons.owner = a.owner \n" +
                         "    AND cons.table_name = a.table_name \n" +

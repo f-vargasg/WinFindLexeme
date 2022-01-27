@@ -35,6 +35,9 @@ namespace WinTestExpader
         {
             try
             {
+                oBl.Owner = txtOwner.Text;
+                oBl.TableName = txtTableName.Text;
+                oBl.DiscFld = txtDiscFld.Text;
                 string lexeme = "<%" + txtLexeme.Text + ">";
                 txtOutput.Text = oBl.CodeExpanded(lexeme, "a");
             }

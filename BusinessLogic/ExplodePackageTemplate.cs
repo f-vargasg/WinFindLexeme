@@ -18,7 +18,12 @@ namespace BusinessLogic
         // OracleMetaDataDL oracleMetaDataDL;
         OracleTableMetaDL oraTblMeta;
 
-        
+
+        public string Owner {
+            get { return this.oraTblMeta.Owner; }
+            set { this.oraTblMeta.Owner = value; }
+        }
+
         public string TableName {
             get { return this.oraTblMeta.TableName; }
             set { this.oraTblMeta.TableName = value; }

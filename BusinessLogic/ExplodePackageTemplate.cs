@@ -470,11 +470,8 @@ namespace BusinessLogic
             string scrapTmp = string.Empty;
             try
             {
-                scrapTmp = ParamKeysNoDiscFlds();
+                scrapTmp = ParamKeyFields();
                 res += scrapTmp;
-
-                scrapTmp = ParamDiscFlds();
-                res += (res.Length > 0 ? "," : string.Empty) + scrapTmp;
 
                 scrapTmp = ParamsNoKeys();
                 res += (res.Length > 0 ? "," : string.Empty) + scrapTmp;
@@ -538,16 +535,20 @@ namespace BusinessLogic
             bool ft = true;
             try
             {
-
+                
                 tblCols = this.oraTblMeta.ObtPkColumnDef();
-                foreach (var item in tblCols)
+                if (tblCols.Count > 1)
                 {
-                    if (item.ColumnName.CompareTo(this.DiscFld) != 0)
+                    foreach (var item in tblCols)
                     {
-                        res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType);
+                        if (item.ColumnName.CompareTo(this.DiscFld) != 0)
+                        {
+                            res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType);
+                        }
+                        ft = false;
                     }
-                    ft = false;
                 }
+                
                 return res;
             }
             catch (Exception)

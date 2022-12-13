@@ -82,7 +82,9 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtPkColumnDef();
                 foreach (var item in tblCols)
                 {
-                    res += (ft ? string.Empty : ", " + Environment.NewLine) + "P" + item.ColumnName + " IN " + item.DataType;
+                    res += (ft ? string.Empty : ", " + Environment.NewLine) + "P" + item.ColumnName + " IN " + 
+                        (DiscFld.ToUpper().CompareTo(item.ColumnName.ToUpper()) == 0 ? " OUT " : string.Empty) + 
+                        item.DataType;
                     ft = false;
                 }
                 return res;

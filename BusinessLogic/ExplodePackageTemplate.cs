@@ -499,9 +499,8 @@ namespace BusinessLogic
                 if (scrap.Length > 0)
                 {
                     scrap = "(" + scrap + ")";
-                    res = "p" + this.DiscFld + " := Consecutivo " + scrap;
                 }
-
+                res = "p" + this.DiscFld + " := Consecutivo " + scrap;
                 return res;
             }
             catch (Exception)

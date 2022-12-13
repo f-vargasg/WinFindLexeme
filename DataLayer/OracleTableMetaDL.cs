@@ -154,8 +154,8 @@ namespace DataLayer
             {
                 res = new List<OraclePkColumnDef>();
                 sqlStm = sqlKeysTable;
-                sqlStm = sqlStm.Replace(lexTableName, this.TableName);
-                sqlStm = sqlStm.Replace(lexOwner, this.Owner);
+                sqlStm = sqlStm.Replace(lexTableName, this.TableName.ToUpper());
+                sqlStm = sqlStm.Replace(lexOwner, this.Owner.ToUpper());
                 using (DbConnection connection = database.CreateOpenConnection())
                 {
                     using (DbCommand command = database.CreateCommand(sqlStm, connection))

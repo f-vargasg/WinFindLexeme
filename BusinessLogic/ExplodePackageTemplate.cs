@@ -2,6 +2,7 @@
 using CommonLexeme;
 using DataLayer;
 using Microsoft.SqlServer.Server;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -19,16 +20,19 @@ namespace BusinessLogic
         OracleTableMetaDL oraTblMeta;
 
 
-        public string Owner {
+        public string Owner
+        {
             get { return this.oraTblMeta.Owner; }
             set { this.oraTblMeta.Owner = value; }
         }
 
-        public string TableName {
+        public string TableName
+        {
             get { return this.oraTblMeta.TableName; }
             set { this.oraTblMeta.TableName = value; }
         }
-        public string DiscFld {
+        public string DiscFld
+        {
             get { return this.oraTblMeta.DiscFld; }
             set { this.oraTblMeta.DiscFld = value; }
         }
@@ -55,7 +59,7 @@ namespace BusinessLogic
                 }
                 else
                 {
-                    res = ("pck_"+ this.TableName);
+                    res = ("pck_" + this.TableName);
                 }
 
                 return res;
@@ -256,7 +260,7 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtPkColumnDef();
                 foreach (var item in tblCols)
                 {
-                    scrap =item.ColumnName;
+                    scrap = item.ColumnName;
                     scrap1 = item.DataType;
 
 
@@ -292,9 +296,9 @@ namespace BusinessLogic
                     scrap = template;
 
                     scrap = scrap.Replace(lexFldDb, item.ColumnName);
-                    res += (ft? string.Empty : Environment.NewLine + "; ") +
+                    res += (ft ? string.Empty : Environment.NewLine + "; ") +
                         scrap;
-                    ft = false; 
+                    ft = false;
                 }
 
                 return res;
@@ -320,7 +324,7 @@ namespace BusinessLogic
                 {
 
                     res += (ft ? string.Empty : Environment.NewLine + ", ") +
-                        "p" + item.ColumnName + " => " + 
+                        "p" + item.ColumnName + " => " +
                          (item.ColumnName.Equals("COD_REGISTRO_N".ToUpper()) ? "w" : "p") + item.ColumnName;
                     ft = false;
                 }
@@ -392,20 +396,20 @@ namespace BusinessLogic
                         break;
                     case ConstExpandPck.lexParamsToInserta:
                         res = ParamsToInserta();
-                        break; 
+                        break;
                     case ConstExpandPck.lexModifyParams:
                         res = ModifyParams();
                         break;
                     case ConstExpandPck.lexTblModifyFlds:
                         res = TblModifyFlds();
                         break;
-                     case ConstExpandPck.lexPrintLstKeys:
+                    case ConstExpandPck.lexPrintLstKeys:
                         res = PrintLstKeys();
-                        break; 
+                        break;
                     case ConstExpandPck.lexAddKeysParametersInvoke:
                         res = AddKeysParametersInvoke();
                         break;
-                     case ConstExpandPck.lexParamKeysCall:
+                    case ConstExpandPck.lexParamKeysCall:
                         res = ParamKeysCall();
                         break;
                     /* case ConstExpandPck.lexParamNoDiscFlds:
@@ -452,9 +456,10 @@ namespace BusinessLogic
             try
             {
                 // res = "FUNCTION CONSECUTIVO <%paramKeysNoDiscFlds> RETURN NUMBER";
-                res = "FUNCTION CONSECUTIVO " +  ConstExpandPck.lexParamKeysNoDiscFlds + " RETURN NUMBER";
+                res = "FUNCTION CONSECUTIVO " + ConstExpandPck.lexParamKeysNoDiscFlds + " RETURN NUMBER";
                 scrap = ParamKeysNoDiscFlds();
-                scrap = (scrap.Length > 0 ? "(" + scrap + ")" : scrap);
+                if (scrap.Length > 0)
+                    scrap = (scrap.Length > 0 ? "(" + scrap + ")" : scrap);
                 res = res.Replace(ConstExpandPck.lexParamKeysNoDiscFlds, scrap);
                 return res;
             }
@@ -488,12 +493,15 @@ namespace BusinessLogic
         private string AsignaDiscFlds()
         {
             string res = string.Empty;
-            string scrap = string.Empty;
             try
             {
-                scrap = ParamCallConsecFunc();
-                scrap = (scrap.Length > 0 ? "(" : string.Empty) + scrap + (scrap.Length > 0 ? ")" : string.Empty);
-                res = "p" + this.DiscFld + " := Consecutivo " + scrap;
+                string scrap = ParamCallConsecFunc();
+                if (scrap.Length > 0)
+                {
+                    scrap = "(" + scrap + ")";
+                    res = "p" + this.DiscFld + " := Consecutivo " + scrap;
+                }
+
                 return res;
             }
             catch (Exception)
@@ -535,7 +543,7 @@ namespace BusinessLogic
             bool ft = true;
             try
             {
-                
+
                 tblCols = this.oraTblMeta.ObtPkColumnDef();
                 if (tblCols.Count > 1)
                 {
@@ -548,7 +556,7 @@ namespace BusinessLogic
                         ft = false;
                     }
                 }
-                
+
                 return res;
             }
             catch (Exception)
@@ -686,7 +694,7 @@ namespace BusinessLogic
                 tblCols = this.oraTblMeta.ObtPkColumnDef();
                 foreach (var item in tblCols)
                 {
-                    if (item.ColumnName.CompareTo(this.DiscFld) != 0)
+                    if (item.ColumnName.ToUpper().CompareTo(this.DiscFld.ToUpper()) != 0)
                     {
                         res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " => " + "p" + item.ColumnName);
                         ft = false;

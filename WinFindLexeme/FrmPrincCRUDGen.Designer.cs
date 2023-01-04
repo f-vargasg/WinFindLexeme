@@ -39,8 +39,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDiscFld = new System.Windows.Forms.TextBox();
             this.TemplatesTab = new System.Windows.Forms.TabControl();
+            this.SpecOutTbPg = new System.Windows.Forms.TabPage();
+            this.txtSpec = new System.Windows.Forms.TextBox();
+            this.BodyOutTbPg = new System.Windows.Forms.TabPage();
+            this.txtBody = new System.Windows.Forms.TextBox();
             this.SpecTempTbPg = new System.Windows.Forms.TabPage();
+            this.txtTempSpec = new System.Windows.Forms.TextBox();
             this.BodyTempTbPg = new System.Windows.Forms.TabPage();
+            this.txtTempBod = new System.Windows.Forms.TextBox();
             this.TestTbPg = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.txtLexeme = new System.Windows.Forms.TextBox();
@@ -49,40 +55,35 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.pnlParameters = new System.Windows.Forms.Panel();
-            this.BodyOutTbPg = new System.Windows.Forms.TabPage();
-            this.SpecOutTbPg = new System.Windows.Forms.TabPage();
-            this.txtSpec = new System.Windows.Forms.TextBox();
-            this.txtBody = new System.Windows.Forms.TextBox();
-            this.txtTempSpec = new System.Windows.Forms.TextBox();
-            this.txtTempBod = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.TemplatesTab.SuspendLayout();
+            this.SpecOutTbPg.SuspendLayout();
+            this.BodyOutTbPg.SuspendLayout();
             this.SpecTempTbPg.SuspendLayout();
             this.BodyTempTbPg.SuspendLayout();
             this.TestTbPg.SuspendLayout();
             this.pnlParameters.SuspendLayout();
-            this.BodyOutTbPg.SuspendLayout();
-            this.SpecOutTbPg.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 47);
+            this.label1.Location = new System.Drawing.Point(-3, 64);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 20);
+            this.label1.Size = new System.Drawing.Size(176, 32);
             this.label1.TabIndex = 3;
             this.label1.Text = "Table Name:";
             // 
             // txtTableName
             // 
-            this.txtTableName.Location = new System.Drawing.Point(133, 44);
+            this.txtTableName.Location = new System.Drawing.Point(208, 61);
             this.txtTableName.Name = "txtTableName";
-            this.txtTableName.Size = new System.Drawing.Size(502, 26);
+            this.txtTableName.Size = new System.Drawing.Size(502, 39);
             this.txtTableName.TabIndex = 2;
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExittlsStr,
             this.DoTlsStrp,
@@ -90,7 +91,7 @@
             this.TestTlsStrp});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1086, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1144, 38);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -100,7 +101,7 @@
             this.ExittlsStr.Image = ((System.Drawing.Image)(resources.GetObject("ExittlsStr.Image")));
             this.ExittlsStr.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ExittlsStr.Name = "ExittlsStr";
-            this.ExittlsStr.Size = new System.Drawing.Size(23, 22);
+            this.ExittlsStr.Size = new System.Drawing.Size(40, 32);
             this.ExittlsStr.Text = "toolStripButton3";
             this.ExittlsStr.ToolTipText = "Exit";
             this.ExittlsStr.Click += new System.EventHandler(this.ExittlsStr_Click);
@@ -111,7 +112,7 @@
             this.DoTlsStrp.Image = ((System.Drawing.Image)(resources.GetObject("DoTlsStrp.Image")));
             this.DoTlsStrp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DoTlsStrp.Name = "DoTlsStrp";
-            this.DoTlsStrp.Size = new System.Drawing.Size(23, 22);
+            this.DoTlsStrp.Size = new System.Drawing.Size(40, 32);
             this.DoTlsStrp.Text = "toolStripButton1";
             this.DoTlsStrp.ToolTipText = "Do Process";
             this.DoTlsStrp.Click += new System.EventHandler(this.DoTlsStrp_Click);
@@ -122,7 +123,7 @@
             this.LoadTempTlsStrp.Image = ((System.Drawing.Image)(resources.GetObject("LoadTempTlsStrp.Image")));
             this.LoadTempTlsStrp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.LoadTempTlsStrp.Name = "LoadTempTlsStrp";
-            this.LoadTempTlsStrp.Size = new System.Drawing.Size(23, 22);
+            this.LoadTempTlsStrp.Size = new System.Drawing.Size(40, 32);
             this.LoadTempTlsStrp.Text = "toolStripButton1";
             this.LoadTempTlsStrp.ToolTipText = "Load Template";
             this.LoadTempTlsStrp.Click += new System.EventHandler(this.LoadTempTlsStrp_Click);
@@ -133,7 +134,7 @@
             this.TestTlsStrp.Image = ((System.Drawing.Image)(resources.GetObject("TestTlsStrp.Image")));
             this.TestTlsStrp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TestTlsStrp.Name = "TestTlsStrp";
-            this.TestTlsStrp.Size = new System.Drawing.Size(23, 22);
+            this.TestTlsStrp.Size = new System.Drawing.Size(40, 32);
             this.TestTlsStrp.Text = "toolStripButton2";
             this.TestTlsStrp.ToolTipText = "Test";
             this.TestTlsStrp.Click += new System.EventHandler(this.TestTlsStrp_Click);
@@ -141,17 +142,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 79);
+            this.label2.Location = new System.Drawing.Point(3, 109);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 20);
+            this.label2.Size = new System.Drawing.Size(196, 32);
             this.label2.TabIndex = 6;
             this.label2.Text = "Discriminador:";
             // 
             // txtDiscFld
             // 
-            this.txtDiscFld.Location = new System.Drawing.Point(133, 76);
+            this.txtDiscFld.Location = new System.Drawing.Point(208, 106);
             this.txtDiscFld.Name = "txtDiscFld";
-            this.txtDiscFld.Size = new System.Drawing.Size(502, 26);
+            this.txtDiscFld.Size = new System.Drawing.Size(502, 39);
             this.txtDiscFld.TabIndex = 3;
             // 
             // TemplatesTab
@@ -164,33 +165,93 @@
             this.TemplatesTab.Controls.Add(this.SpecTempTbPg);
             this.TemplatesTab.Controls.Add(this.BodyTempTbPg);
             this.TemplatesTab.Controls.Add(this.TestTbPg);
-            this.TemplatesTab.Location = new System.Drawing.Point(9, 153);
+            this.TemplatesTab.Location = new System.Drawing.Point(9, 202);
             this.TemplatesTab.Name = "TemplatesTab";
             this.TemplatesTab.SelectedIndex = 0;
-            this.TemplatesTab.Size = new System.Drawing.Size(1077, 476);
+            this.TemplatesTab.Size = new System.Drawing.Size(1135, 509);
             this.TemplatesTab.TabIndex = 5;
+            // 
+            // SpecOutTbPg
+            // 
+            this.SpecOutTbPg.Controls.Add(this.txtSpec);
+            this.SpecOutTbPg.Location = new System.Drawing.Point(4, 41);
+            this.SpecOutTbPg.Name = "SpecOutTbPg";
+            this.SpecOutTbPg.Size = new System.Drawing.Size(1127, 464);
+            this.SpecOutTbPg.TabIndex = 4;
+            this.SpecOutTbPg.Text = "Spec";
+            this.SpecOutTbPg.UseVisualStyleBackColor = true;
+            // 
+            // txtSpec
+            // 
+            this.txtSpec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSpec.Location = new System.Drawing.Point(0, 0);
+            this.txtSpec.Multiline = true;
+            this.txtSpec.Name = "txtSpec";
+            this.txtSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtSpec.Size = new System.Drawing.Size(1127, 464);
+            this.txtSpec.TabIndex = 3;
+            // 
+            // BodyOutTbPg
+            // 
+            this.BodyOutTbPg.Controls.Add(this.txtBody);
+            this.BodyOutTbPg.Location = new System.Drawing.Point(4, 41);
+            this.BodyOutTbPg.Name = "BodyOutTbPg";
+            this.BodyOutTbPg.Size = new System.Drawing.Size(1069, 431);
+            this.BodyOutTbPg.TabIndex = 3;
+            this.BodyOutTbPg.Text = "Body";
+            this.BodyOutTbPg.UseVisualStyleBackColor = true;
+            // 
+            // txtBody
+            // 
+            this.txtBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBody.Location = new System.Drawing.Point(0, 0);
+            this.txtBody.Multiline = true;
+            this.txtBody.Name = "txtBody";
+            this.txtBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtBody.Size = new System.Drawing.Size(1069, 431);
+            this.txtBody.TabIndex = 2;
             // 
             // SpecTempTbPg
             // 
             this.SpecTempTbPg.Controls.Add(this.txtTempSpec);
-            this.SpecTempTbPg.Location = new System.Drawing.Point(4, 29);
+            this.SpecTempTbPg.Location = new System.Drawing.Point(4, 41);
             this.SpecTempTbPg.Name = "SpecTempTbPg";
             this.SpecTempTbPg.Padding = new System.Windows.Forms.Padding(3);
-            this.SpecTempTbPg.Size = new System.Drawing.Size(1069, 443);
+            this.SpecTempTbPg.Size = new System.Drawing.Size(1069, 431);
             this.SpecTempTbPg.TabIndex = 0;
             this.SpecTempTbPg.Text = "Spec Template";
             this.SpecTempTbPg.UseVisualStyleBackColor = true;
             // 
+            // txtTempSpec
+            // 
+            this.txtTempSpec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTempSpec.Location = new System.Drawing.Point(3, 3);
+            this.txtTempSpec.Multiline = true;
+            this.txtTempSpec.Name = "txtTempSpec";
+            this.txtTempSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtTempSpec.Size = new System.Drawing.Size(1063, 425);
+            this.txtTempSpec.TabIndex = 4;
+            // 
             // BodyTempTbPg
             // 
             this.BodyTempTbPg.Controls.Add(this.txtTempBod);
-            this.BodyTempTbPg.Location = new System.Drawing.Point(4, 29);
+            this.BodyTempTbPg.Location = new System.Drawing.Point(4, 41);
             this.BodyTempTbPg.Name = "BodyTempTbPg";
             this.BodyTempTbPg.Padding = new System.Windows.Forms.Padding(3);
-            this.BodyTempTbPg.Size = new System.Drawing.Size(1069, 443);
+            this.BodyTempTbPg.Size = new System.Drawing.Size(1069, 431);
             this.BodyTempTbPg.TabIndex = 1;
             this.BodyTempTbPg.Text = "Body Template";
             this.BodyTempTbPg.UseVisualStyleBackColor = true;
+            // 
+            // txtTempBod
+            // 
+            this.txtTempBod.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTempBod.Location = new System.Drawing.Point(3, 3);
+            this.txtTempBod.Multiline = true;
+            this.txtTempBod.Name = "txtTempBod";
+            this.txtTempBod.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtTempBod.Size = new System.Drawing.Size(1063, 425);
+            this.txtTempBod.TabIndex = 3;
             // 
             // TestTbPg
             // 
@@ -198,10 +259,10 @@
             this.TestTbPg.Controls.Add(this.txtLexeme);
             this.TestTbPg.Controls.Add(this.butDo);
             this.TestTbPg.Controls.Add(this.txtOutput);
-            this.TestTbPg.Location = new System.Drawing.Point(4, 29);
+            this.TestTbPg.Location = new System.Drawing.Point(4, 41);
             this.TestTbPg.Name = "TestTbPg";
             this.TestTbPg.Padding = new System.Windows.Forms.Padding(3);
-            this.TestTbPg.Size = new System.Drawing.Size(1069, 443);
+            this.TestTbPg.Size = new System.Drawing.Size(1069, 431);
             this.TestTbPg.TabIndex = 2;
             this.TestTbPg.Text = "Test Lexemes";
             this.TestTbPg.UseVisualStyleBackColor = true;
@@ -212,7 +273,7 @@
             this.label3.Location = new System.Drawing.Point(25, 28);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 20);
+            this.label3.Size = new System.Drawing.Size(115, 32);
             this.label3.TabIndex = 24;
             this.label3.Text = "Lexeme";
             // 
@@ -221,7 +282,7 @@
             this.txtLexeme.Location = new System.Drawing.Point(120, 28);
             this.txtLexeme.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLexeme.Name = "txtLexeme";
-            this.txtLexeme.Size = new System.Drawing.Size(527, 26);
+            this.txtLexeme.Size = new System.Drawing.Size(527, 39);
             this.txtLexeme.TabIndex = 25;
             // 
             // butDo
@@ -250,17 +311,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 15);
+            this.label5.Location = new System.Drawing.Point(-3, 19);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.Size = new System.Drawing.Size(105, 32);
             this.label5.TabIndex = 8;
             this.label5.Text = "Owner:";
             // 
             // txtOwner
             // 
-            this.txtOwner.Location = new System.Drawing.Point(133, 12);
+            this.txtOwner.Location = new System.Drawing.Point(208, 12);
             this.txtOwner.Name = "txtOwner";
-            this.txtOwner.Size = new System.Drawing.Size(502, 26);
+            this.txtOwner.Size = new System.Drawing.Size(502, 39);
             this.txtOwner.TabIndex = 1;
             // 
             // pnlParameters
@@ -274,76 +335,16 @@
             this.pnlParameters.Controls.Add(this.txtTableName);
             this.pnlParameters.Controls.Add(this.txtDiscFld);
             this.pnlParameters.Controls.Add(this.label1);
-            this.pnlParameters.Location = new System.Drawing.Point(13, 28);
+            this.pnlParameters.Location = new System.Drawing.Point(12, 41);
             this.pnlParameters.Name = "pnlParameters";
-            this.pnlParameters.Size = new System.Drawing.Size(1073, 119);
+            this.pnlParameters.Size = new System.Drawing.Size(1131, 155);
             this.pnlParameters.TabIndex = 9;
-            // 
-            // BodyOutTbPg
-            // 
-            this.BodyOutTbPg.Controls.Add(this.txtBody);
-            this.BodyOutTbPg.Location = new System.Drawing.Point(4, 29);
-            this.BodyOutTbPg.Name = "BodyOutTbPg";
-            this.BodyOutTbPg.Size = new System.Drawing.Size(1069, 443);
-            this.BodyOutTbPg.TabIndex = 3;
-            this.BodyOutTbPg.Text = "Body";
-            this.BodyOutTbPg.UseVisualStyleBackColor = true;
-            // 
-            // SpecOutTbPg
-            // 
-            this.SpecOutTbPg.Controls.Add(this.txtSpec);
-            this.SpecOutTbPg.Location = new System.Drawing.Point(4, 29);
-            this.SpecOutTbPg.Name = "SpecOutTbPg";
-            this.SpecOutTbPg.Size = new System.Drawing.Size(1069, 443);
-            this.SpecOutTbPg.TabIndex = 4;
-            this.SpecOutTbPg.Text = "Spec";
-            this.SpecOutTbPg.UseVisualStyleBackColor = true;
-            // 
-            // txtSpec
-            // 
-            this.txtSpec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSpec.Location = new System.Drawing.Point(0, 0);
-            this.txtSpec.Multiline = true;
-            this.txtSpec.Name = "txtSpec";
-            this.txtSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSpec.Size = new System.Drawing.Size(1069, 443);
-            this.txtSpec.TabIndex = 3;
-            // 
-            // txtBody
-            // 
-            this.txtBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBody.Location = new System.Drawing.Point(0, 0);
-            this.txtBody.Multiline = true;
-            this.txtBody.Name = "txtBody";
-            this.txtBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBody.Size = new System.Drawing.Size(1069, 443);
-            this.txtBody.TabIndex = 2;
-            // 
-            // txtTempSpec
-            // 
-            this.txtTempSpec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTempSpec.Location = new System.Drawing.Point(3, 3);
-            this.txtTempSpec.Multiline = true;
-            this.txtTempSpec.Name = "txtTempSpec";
-            this.txtTempSpec.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempSpec.Size = new System.Drawing.Size(1063, 437);
-            this.txtTempSpec.TabIndex = 4;
-            // 
-            // txtTempBod
-            // 
-            this.txtTempBod.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTempBod.Location = new System.Drawing.Point(3, 3);
-            this.txtTempBod.Multiline = true;
-            this.txtTempBod.Name = "txtTempBod";
-            this.txtTempBod.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTempBod.Size = new System.Drawing.Size(1063, 437);
-            this.txtTempBod.TabIndex = 3;
             // 
             // FrmPrincCRUDGen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 632);
+            this.ClientSize = new System.Drawing.Size(1144, 714);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.pnlParameters);
             this.Controls.Add(this.TemplatesTab);
@@ -356,6 +357,10 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.TemplatesTab.ResumeLayout(false);
+            this.SpecOutTbPg.ResumeLayout(false);
+            this.SpecOutTbPg.PerformLayout();
+            this.BodyOutTbPg.ResumeLayout(false);
+            this.BodyOutTbPg.PerformLayout();
             this.SpecTempTbPg.ResumeLayout(false);
             this.SpecTempTbPg.PerformLayout();
             this.BodyTempTbPg.ResumeLayout(false);
@@ -364,10 +369,6 @@
             this.TestTbPg.PerformLayout();
             this.pnlParameters.ResumeLayout(false);
             this.pnlParameters.PerformLayout();
-            this.BodyOutTbPg.ResumeLayout(false);
-            this.BodyOutTbPg.PerformLayout();
-            this.SpecOutTbPg.ResumeLayout(false);
-            this.SpecOutTbPg.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

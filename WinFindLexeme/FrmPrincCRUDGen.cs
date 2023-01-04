@@ -62,8 +62,6 @@ namespace WinOraclePackage
                 this.expandCode.DiscFld = txtDiscFld.Text;
                 txtSpec.Text = this.expandCode.ExpandCode(txtTempSpec.Text, "a");
                 txtBody.Text = this.expandCode.ExpandCode(txtTempBod.Text, "a");
-
-
             }
             catch (Exception ex)
             {

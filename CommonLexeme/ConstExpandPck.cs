@@ -11,6 +11,7 @@ namespace CommonLexeme
         // noDiscFldsCmp
         public const string lexPackageName = "<%packageName>";
         public const string lexTableName = "<%tableName>";
+        public const string lexDecDescFld = "<%decDescFld>";   // declaración de variable descriminador
         public const string lexParamKeyFlds = "<%paramKeyFlds>";
         public const string lexParamTableFlds = "<%paramTableFlds>";
         public const string lexParamKeysNoDiscFlds = "<%paramKeysNoDiscFlds>";

@@ -83,7 +83,31 @@ namespace BusinessLogic
                 foreach (var item in tblCols)
                 {
                     res += (ft ? string.Empty : ", " + Environment.NewLine) + "P" + item.ColumnName + " IN " + 
-                        (DiscFld.ToUpper().CompareTo(item.ColumnName.ToUpper()) == 0 ? " OUT " : string.Empty) + 
+                        item.DataType;
+                    ft = false;
+                }
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ParamKeyFieldsForInsert()
+        {
+            List<OraclePkColumnDef> tblCols = null;
+            string res = string.Empty;
+            bool ft = true;
+            try
+            {
+
+                tblCols = this.oraTblMeta.ObtPkColumnDef();
+                foreach (var item in tblCols)
+                {
+                    res += (ft ? string.Empty : ", " + Environment.NewLine) + "P" + item.ColumnName + " IN " +
+                        (DiscFld.ToUpper().CompareTo(item.ColumnName.ToUpper()) == 0 ? " OUT " : string.Empty) +
                         item.DataType;
                     ft = false;
                 }
@@ -448,7 +472,6 @@ namespace BusinessLogic
 
                 throw;
             }
-
         }
 
         private string ParamConsecFunc()
@@ -477,7 +500,8 @@ namespace BusinessLogic
             string scrapTmp = string.Empty;
             try
             {
-                scrapTmp = ParamKeyFields();
+                // scrapTmp = ParamKeyFields();
+                scrapTmp = ParamKeyFieldsForInsert();
                 res += scrapTmp;
 
                 scrapTmp = ParamsNoKeys();
@@ -550,9 +574,9 @@ namespace BusinessLogic
                 {
                     foreach (var item in tblCols)
                     {
-                        if (item.ColumnName.CompareTo(this.DiscFld) != 0)
+                        if (item.ColumnName.ToUpper().CompareTo(this.DiscFld.ToUpper()) != 0)
                         {
-                            res += ((ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType);
+                            res += ((!ft ? string.Empty : ", " + Environment.NewLine) + "p" + item.ColumnName + " IN " + item.DataType);
                         }
                         ft = false;
                     }

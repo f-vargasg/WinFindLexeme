@@ -109,6 +109,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EsquemaParaDejarSqls.txt" />
     <Content Include="Templates\temp_bod.sql" />
     <Content Include="Templates\temp_esp.sql" />
   </ItemGroup>

@@ -1,1 +1,47 @@
-﻿
+﻿/*
+ codeTemplateBE.CSharpAttribute = ((dr[""].Equals(DBNull.Value)) ? string.Empty :
+                                                       Convert.ToString(dr[""]);  
+plantillaBE.CodSistemaV = ((dr["COD_SISTEMA_V"].Equals(DBNull.Value)) ? string.Empty :Convert.ToString(dr["COD_SISTEMA_V"]));
+
+
+Esto sirve para generar la los campos del sql en forma parametrica en un archivo
+
+
+*/                                                       
+
+
+
+
+<%colName> || ',' as PlSqlLstColumns
+-----------------------------------------------------------------------------------
+p<%colName> || ' IN ' || <%colType> as PlSqlParams
+-----------------------------------------------------------------------------------
+<%cSharpType> || ' ' || <%csColNameLower> as CSharpMemberClass
+-----------------------------------------------------------------------------------
+<%varEntityName> || '.' || <%csColNameUpper> || ' = ' || <%csEmptyType> as CsInitEnitity
+<%csEmptyType> := string => 'string.empty'
+                DateTiime => DateTime.Now
+                int, double, float => 0.00
+                clob  => null
+-----------------------------------------------------------------------------------
+<%varEntityName> || '.' || <%csColNameUpper> || ' = ' || '<%csFConvertType>' || '(' || <%drVarRow> || '["' || <%colName> || '"]);' as fillEntityFromDataRow
+<%csFConvertType> := string     => 'Convert.ToString'
+                     DateTiime  => 'Convert.ToDateTime'
+                     int        => 'Convert.ToInt64'
+                     Double     => 'Convert.ToDouble'
+-------------------------------------------------------------------------------------------
+<%prefixCtrl><%csColNameUpper> || ' = ' || <%csFConvertTypeUi> || '(' || <%varEntityName> || '.' || <%csColNameUpper> || ';' as FillUiFromEnitity
+
+<%csFConvertTypeUi> := string     => 'Convert.ToString'
+                       DateTiime  => 'Convert.ToDateTime'
+                       int        => 'Convert.ToString'
+                       Double     => 'Convert.ToString'
+--------------------------------------------------------------------------------------------
+<%csColNameUpper> as CSHARPATRIBUTE
+--------------------------------------------------------------------------------------------
+'public ' || <%csType> || ' ' || <%csColNameUpper> || ' { get: set ; } ' as CSharpProperty
+    --------------------------------------------------------------------------------------------
+<%csColNameUpper> as CSHARPATRIBUTE
+--------------------------------------------------------------------------------------------
+<%csType> || ' ' || <%csColNameUpper> || ' { get: set ; } ' as CSharpParams
+
